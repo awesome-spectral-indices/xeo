@@ -176,18 +176,6 @@ def _create_catalogue():
     for key, value in catalogue["instruments"].items():
         catalogue["instruments"][key] = Instrument(value)
 
-    return Catalogue(catalogue)
+    return Catalogue(catalogue), Instruments(catalogue["instruments"], frozen_box=True)
 
-catalogue = _create_catalogue()
-
-def _create_instruments():
-    """Creates the instruments object locally available."""
-
-    catalogue = _load_JSON()
-    # instruments_class = {}
-    for key, value in catalogue["instruments"].items():
-        catalogue["instruments"][key] = Instrument(value)
-
-    return Instruments(catalogue["instruments"], frozen_box=True)
-
-instruments = _create_instruments()
+catalogue, instruments = _create_catalogue()
