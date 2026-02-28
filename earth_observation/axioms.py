@@ -1,3 +1,5 @@
+import pandas as pd
+
 from box import Box
 from rich.table import Table
 from rich.console import Console, RenderResult
@@ -166,6 +168,25 @@ class Instrument(object):
         """Human readable output of the Instrument."""
 
         return repr(self.data)
+
+    def extensions(self):
+        
+        if "extensions" in self.data:
+            return list(self.data["extensions"])
+
+    def bands(self):
+
+        if self.extensions():
+            if "spectral" in self.data["extensions"]:
+                spectral = self.data["extensions"]["spectral"]
+                return pd.DataFrame.from_dict(spectral["bands"],orient="index")
+
+    def srf(self):
+
+        if self.extensions():
+            if "spectral" in self.data["extensions"]:
+                spectral = self.data["extensions"]["spectral"]
+                return pd.DataFrame.from_dict(spectral["spectral_response_function"],orient="columns")
 
 
 def _create_catalogue():
