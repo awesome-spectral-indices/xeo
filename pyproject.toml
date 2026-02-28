@@ -24,6 +24,8 @@ classifiers=[
 
 dependencies = [
   "pandas>=2.0.3",
+  "python-box>=6.0",
+  "rich>=14.3.3",
 ]
 
 [project.urls]
@@ -38,4 +40,4 @@ profile = "black"
 exclude = ["tests"]
 
 [tool.setuptools.package-data]
-"earth-observation.data" = ["*.json"]
+"earth_observation.data" = ["*.json"]
