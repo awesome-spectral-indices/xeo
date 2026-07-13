@@ -3,6 +3,7 @@ from importlib.resources import files
 from io import StringIO
 
 import pandas as pd
+import pytest
 import xeo
 from rich.console import Console
 
@@ -95,6 +96,52 @@ def test_srf_returns_none_when_unavailable():
 
     assert not instrument.has_srf
     assert instrument.srf() is None
+
+
+def test_get_data_access_uses_earth_engine_primary_by_default():
+    result = xeo.instruments.MSI_S2A.get_data_access()
+
+    assert result == {
+        "stac_endpoint": None,
+        "collection": "COPERNICUS/S2_SR_HARMONIZED",
+        "docs": (
+            "https://developers.google.com/earth-engine/datasets/catalog/"
+            "COPERNICUS_S2_SR_HARMONIZED"
+        ),
+    }
+
+
+def test_get_data_access_supports_provider_and_processing_level():
+    planetary_computer = xeo.instruments.MSI_S2A.get_data_access(
+        "planetary_computer", "boa"
+    )
+    cdse = xeo.instruments.MSI_S2A.get_data_access("cdse", "toa")
+
+    assert planetary_computer == {
+        "stac_endpoint": "https://planetarycomputer.microsoft.com/api/stac/v1",
+        "collection": "sentinel-2-l2a",
+        "docs": "https://planetarycomputer.microsoft.com/dataset/sentinel-2-l2a",
+    }
+    assert cdse["collection"] == "sentinel-2-l1c"
+    assert cdse["stac_endpoint"] == "https://stac.dataspace.copernicus.eu/v1"
+
+
+def test_get_data_access_returns_none_when_valid_access_point_is_unavailable():
+    assert xeo.instruments.MSI_S2A.get_data_access(processing_level="raw") is None
+    assert xeo.instruments.ASTER.get_data_access(provider="eopf") is None
+    assert xeo.instruments.ALTUMPT_MICASENSE.get_data_access() is None
+
+
+@pytest.mark.parametrize(
+    ("kwargs", "message"),
+    [
+        ({"provider": "planetary"}, "provider must be one of"),
+        ({"processing_level": "l2a"}, "processing_level must be one of"),
+    ],
+)
+def test_get_data_access_rejects_unknown_options(kwargs, message):
+    with pytest.raises(ValueError, match=message):
+        xeo.instruments.MSI_S2A.get_data_access(**kwargs)
 
 
 def test_rich_instrument_table_still_renders():

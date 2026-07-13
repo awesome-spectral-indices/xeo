@@ -296,6 +296,75 @@ class Instrument(object):
 
         return self._data.get("platform_companions", [])
 
+    def get_data_access(
+        self,
+        provider: str = "ee",
+        processing_level: str = "primary",
+    ) -> dict[str, str | None] | None:
+        """Return metadata for an available data access point.
+
+        Parameters
+        ----------
+        provider : str, default="ee"
+            Data provider. One of ``ee``, ``planetary_computer``, ``cdse``, or
+            ``eopf``.
+        processing_level : str, default="primary"
+            Processing level. One of ``primary``, ``boa``, ``toa``, or ``raw``.
+
+        Returns
+        -------
+        dict or None
+            A dictionary containing ``stac_endpoint``, ``collection``, and
+            ``docs``. Missing values, such as the Earth Engine STAC endpoint,
+            are represented by ``None``. ``None`` is returned when the provider
+            or processing level is valid but unavailable for this instrument.
+
+        Examples
+        --------
+        >>> import xeo
+        >>> xeo.instruments.MSI_S2A.get_data_access()["collection"]
+        'COPERNICUS/S2_SR_HARMONIZED'
+        >>> xeo.instruments.MSI_S2A.get_data_access("cdse", "toa")["collection"]
+        'sentinel-2-l1c'
+        >>> xeo.instruments.MSI_S2A.get_data_access(processing_level="raw") is None
+        True
+        """
+
+        providers = {
+            "ee": "ee",
+            "planetary_computer": "planetary_computer",
+            "cdse": "cdse",
+            "eopf": "eopf",
+        }
+        processing_levels = ("primary", "boa", "toa", "raw")
+
+        if provider not in providers:
+            choices = ", ".join(providers)
+            raise ValueError(
+                f"provider must be one of: {choices}; received {provider!r}"
+            )
+        if processing_level not in processing_levels:
+            choices = ", ".join(processing_levels)
+            raise ValueError(
+                "processing_level must be one of: "
+                f"{choices}; received {processing_level!r}"
+            )
+
+        data_access = self.extensions.get("data_access", {})
+        provider_metadata = data_access.get(providers[provider])
+        if not isinstance(provider_metadata, dict):
+            return None
+
+        access_metadata = provider_metadata.get(processing_level)
+        if not isinstance(access_metadata, dict):
+            return None
+
+        return {
+            "stac_endpoint": provider_metadata.get("stac_endpoint"),
+            "collection": access_metadata.get("collection"),
+            "docs": access_metadata.get("docs"),
+        }
+
     @property
     def has_bands(self) -> bool:
         """Whether materialized spectral band definitions are available."""
