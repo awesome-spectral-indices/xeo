@@ -20,8 +20,8 @@ class Catalogue(object):
 
     Examples
     --------
-    >>> import earth_observation as eo
-    >>> eo.catalogue
+    >>> import xeo
+    >>> xeo.catalogue
     Result here
     """
 
@@ -69,8 +69,8 @@ class Instruments(Box):
 
     Examples
     --------
-    >>> import earth_observation as eo
-    >>> eo.catalogue.instruments
+    >>> import xeo
+    >>> xeo.catalogue.instruments
     Result here
     """
 
@@ -147,10 +147,10 @@ class Instrument(object):
 
     Examples
     --------
-    >>> import earth_observation as eo
-    >>> eo.catalogue.instruments.MSI_S2A
+    >>> import xeo
+    >>> xeo.catalogue.instruments.MSI_S2A
     Result
-    >>> eo.catalogue.instruments.MSI_S2A.operator
+    >>> xeo.catalogue.instruments.MSI_S2A.operator
     Result
     """
 

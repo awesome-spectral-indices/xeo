@@ -16,6 +16,6 @@ def _load_JSON(file="catalogue.json"):
     object
         JSON file.
     """
-    data_file = files("earth_observation.data") / file
+    data_file = files("xeo.data") / file
     with data_file.open("r", encoding="utf-8") as f:
         return json.load(f)

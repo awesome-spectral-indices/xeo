@@ -3,7 +3,7 @@ requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "earth-observation"
+name = "xeo"
 version = "2026.2.0"
 description = "Awesome Earth Observation Instruments in Python"
 readme = { file = "README.md", content-type = "text/markdown" }
@@ -29,9 +29,9 @@ dependencies = [
 ]
 
 [project.urls]
-"Bug Tracker"= "https://github.com/awesome-spectral-indices/earth-observation/issues"
-"Source Code" = "https://github.com/awesome-spectral-indices/earth-observation"
-Homepage = "https://github.com/awesome-spectral-indices/earth-observation"
+"Bug Tracker" = "https://github.com/awesome-spectral-indices/xeo/issues"
+"Source Code" = "https://github.com/awesome-spectral-indices/xeo"
+Homepage = "https://github.com/awesome-spectral-indices/xeo"
 
 [tool.isort]
 profile = "black"
@@ -40,4 +40,4 @@ profile = "black"
 exclude = ["tests"]
 
 [tool.setuptools.package-data]
-"earth_observation.data" = ["*.json"]
+"xeo.data" = ["*.json"]
