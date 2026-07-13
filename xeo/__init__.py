@@ -2,6 +2,12 @@
 
 __version__ = "2026.2.0"
 __author__ = "David Montero Loaiza <dml.mont@gmail.com>"
-__all__ = ["catalogue", "instruments"]
+__all__ = [
+    "Catalogue",
+    "Instrument",
+    "Instruments",
+    "catalogue",
+    "instruments",
+]
 
-from .xeo import catalogue, instruments
+from .xeo import Catalogue, Instrument, Instruments, catalogue, instruments

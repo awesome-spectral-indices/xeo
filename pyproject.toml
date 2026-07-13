@@ -37,7 +37,8 @@ Homepage = "https://github.com/awesome-spectral-indices/xeo"
 profile = "black"
 
 [tool.setuptools.packages.find]
-exclude = ["tests"]
+include = ["xeo*"]
+exclude = ["tests*"]
 
 [tool.setuptools.package-data]
 "xeo.data" = ["*.json"]

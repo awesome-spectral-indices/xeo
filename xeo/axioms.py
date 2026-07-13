@@ -1,34 +1,44 @@
-import pandas as pd
+from __future__ import annotations
+
+from copy import deepcopy
+from typing import TYPE_CHECKING, Any
 
 from box import Box
-from rich.table import Table
 from rich.console import Console, RenderResult
+from rich.table import Table
 
 from .utils import _load_JSON
 
+if TYPE_CHECKING:
+    import pandas as pd
+
 
 class Catalogue(object):
-    """Catalogue object.
+    """Awesome Earth Observation Instruments catalogue.
 
-    This object allows interaction with the
-    Awesome Earth Observation Instruments (AEOI) catalogue.
-
-    See Also
-    --------
-    Instruments : Instruments object.
-    Instrument : Instrument object.
+    Parameters
+    ----------
+    catalogue : dict
+        Raw catalogue data.
+    instruments : Instruments, optional
+        Instrument objects created from the raw catalogue.
 
     Examples
     --------
     >>> import xeo
     >>> xeo.catalogue
-    Result here
+    Awesome Earth Observation Instruments (v0.1.0)
+    >>> len(xeo.catalogue.instruments)
+    28
     """
 
-    def __init__(self, catalogue: dict):
-
+    def __init__(
+        self,
+        catalogue: dict[str, Any],
+        instruments: Instruments | None = None,
+    ):
         self.data = catalogue
-        """Dictionary containing the catalogue."""
+        """Raw, JSON-serializable catalogue data."""
 
         self.name = catalogue["name"]
         """Name of the catalogue."""
@@ -40,42 +50,60 @@ class Catalogue(object):
         """URL of the catalogue."""
 
         self.href = catalogue["link"]
-        """URL of the catalogue."""
+        """URL of the catalogue. Equivalent to :attr:`link`."""
 
-        self.instruments = Instruments(catalogue["instruments"], frozen_box=True)
-        """URL of the catalogue."""
+        if instruments is None:
+            instruments = Instruments(
+                {
+                    key: Instrument(value)
+                    for key, value in catalogue["instruments"].items()
+                },
+                frozen_box=True,
+            )
+        self.instruments = instruments
+        """Instruments available in the catalogue."""
 
-    def __repr__(self):
-        """Machine readable output of the Catalogue object."""
+    def __repr__(self) -> str:
+        """Return a concise machine-readable representation."""
 
         return f"{self.name} (v{self.version})"
 
-    def __str__(self):
-        """Human readable output of the Catalogue object."""
+    def __str__(self) -> str:
+        """Return a concise human-readable representation."""
 
         return f"{self.name} (v{self.version})"
+
+    def to_dict(self) -> dict[str, Any]:
+        """Return an independent dictionary containing the raw catalogue."""
+
+        return deepcopy(self.data)
 
 
 class Instruments(Box):
-    """Instruments object.
+    """Collection of instruments in the catalogue.
 
-    This object allows interaction with the complete list of Instruments in the
-    Awesome Earth Observation Instruments (AEOI) catalogue.
-
-    See Also
-    --------
-    Instrument : Instrument object.
-    Catalogue : Catalogue object.
+    Instruments support both mapping and attribute access.
 
     Examples
     --------
     >>> import xeo
-    >>> xeo.catalogue.instruments
-    Result here
+    >>> xeo.instruments.MSI_S2A
+    Instrument(MSI_S2A: MultiSpectral Instrument)
+    >>> xeo.instruments["MSI_S2A"] is xeo.instruments.MSI_S2A
+    True
     """
 
-    def __rich_console__(self, console: Console, options) -> RenderResult:
+    def __repr__(self) -> str:
+        """Return the collection name and its instrument identifiers."""
 
+        return f"Instruments({list(self.keys())})"
+
+    def __str__(self) -> str:
+        """Return the available instrument identifiers."""
+
+        return f"{list(self.keys())}"
+
+    def __rich_console__(self, console: Console, options) -> RenderResult:
         table = Table(title="Awesome Earth Observation Instruments")
 
         table.add_column("Id", style="cyan", no_wrap=True)
@@ -92,7 +120,6 @@ class Instruments(Box):
             "planned": "blue",
             "experimental": "yellow",
         }
-
         type_colors = {
             "hyperspectral": "chartreuse2",
             "multispectral": "orange1",
@@ -101,7 +128,6 @@ class Instruments(Box):
             "rgb": "dark_green",
             "other": "orchid1",
         }
-
         platform_colors = {
             "satellite": "deep_sky_blue3",
             "airborne": "deep_sky_blue3",
@@ -109,25 +135,27 @@ class Instruments(Box):
             "terrestrial": "deep_sky_blue1",
         }
 
-        for key, value in self.items():
-            data = value.data
+        for instrument in self.values():
+            status_color = status_colors.get(instrument.status, "white")
+            styled_status = (
+                f"[{status_color}]{instrument.status}[/{status_color}]"
+            )
 
-            status_color = status_colors.get(data["status"], "white")
-            styled_status = f"[{status_color}]{data['status']}[/{status_color}]"
+            type_color = type_colors.get(instrument.type, "white")
+            styled_type = f"[{type_color}]{instrument.type}[/{type_color}]"
 
-            type_color = type_colors.get(data['type'], "white")
-            styled_type = f"[{type_color}]{data['type']}[/{type_color}]"
-
-            platform_color = platform_colors.get(data['platform_type'], "white")
-            styled_platform = f"[{platform_color}]{data['platform_type']}[/{platform_color}]"
+            platform_color = platform_colors.get(instrument.platform_type, "white")
+            styled_platform = (
+                f"[{platform_color}]{instrument.platform_type}[/{platform_color}]"
+            )
 
             table.add_row(
-                data["id"],
-                data["acronym"],
-                data["name"],
-                ", ".join(data["platform"]),
+                instrument.id,
+                instrument.acronym,
+                instrument.name,
+                ", ".join(instrument.platform),
                 styled_platform,
-                styled_type,        
+                styled_type,
                 styled_status,
             )
 
@@ -135,68 +163,219 @@ class Instruments(Box):
 
 
 class Instrument(object):
-    """Instrument object.
+    """Earth observation instrument from the catalogue.
 
-    This object allows interaction with specific Instruments in the
-    Awesome Earth Observation Instruments (AEOI) catalogue.
-    Attributes of the Instrument can be accessed.
-
-    See Also
-    --------
-    Catalogue : Catalogue object.
+    Core metadata is available directly as attributes. The complete source record
+    remains available through :attr:`data`.
 
     Examples
     --------
     >>> import xeo
-    >>> xeo.catalogue.instruments.MSI_S2A
-    Result
-    >>> xeo.catalogue.instruments.MSI_S2A.operator
-    Result
+    >>> xeo.instruments.MSI_S2A
+    Instrument(MSI_S2A: MultiSpectral Instrument)
+    >>> xeo.instruments.MSI_S2A.operator
+    ['ESA', 'Copernicus']
+    >>> xeo.instruments.MSI_S2A.bands().shape
+    (13, 6)
     """
 
-    def __init__(self, instrument: dict):
+    def __init__(self, instrument: dict[str, Any]):
+        self._data = instrument
 
-        self.data = instrument
-        """Dictionary containing the attributes of the Instrument."""
+    @property
+    def data(self) -> dict[str, Any]:
+        """Complete instrument record from the catalogue."""
 
-    def __repr__(self):
-        """Machine readable output of the Instrument."""
+        return self._data
 
-        return repr(self.data)
+    @property
+    def id(self) -> str:
+        """Instrument identifier."""
 
-    def __str__(self):
-        """Human readable output of the Instrument."""
+        return self._data["id"]
 
-        return repr(self.data)
+    @property
+    def name(self) -> str:
+        """Full instrument name."""
 
-    def extensions(self):
-        
-        if "extensions" in self.data:
-            return list(self.data["extensions"])
+        return self._data["name"]
 
-    def bands(self):
+    @property
+    def acronym(self) -> str:
+        """Instrument acronym."""
 
-        if self.extensions():
-            if "spectral" in self.data["extensions"]:
-                spectral = self.data["extensions"]["spectral"]
-                return pd.DataFrame.from_dict(spectral["bands"],orient="index")
+        return self._data["acronym"]
 
-    def srf(self):
+    @property
+    def type(self) -> str:
+        """Instrument sensing modality."""
 
-        if self.extensions():
-            if "spectral" in self.data["extensions"]:
-                spectral = self.data["extensions"]["spectral"]
-                return pd.DataFrame.from_dict(spectral["spectral_response_function"],orient="columns")
+        return self._data["type"]
+
+    @property
+    def platform_type(self) -> str:
+        """Class of platform carrying the instrument."""
+
+        return self._data["platform_type"]
+
+    @property
+    def platform(self) -> list[str]:
+        """Platforms carrying the instrument."""
+
+        return self._data["platform"]
+
+    @property
+    def operator(self) -> list[str]:
+        """Organizations operating the instrument."""
+
+        return self._data["operator"]
+
+    @property
+    def start_date(self) -> str:
+        """Start of instrument operation."""
+
+        return self._data["start_date"]
+
+    @property
+    def end_date(self) -> str | None:
+        """End of instrument operation, when available."""
+
+        return self._data.get("end_date")
+
+    @property
+    def status(self) -> str:
+        """Instrument lifecycle status."""
+
+        return self._data["status"]
+
+    @property
+    def availability(self) -> str:
+        """Instrument data accessibility level."""
+
+        return self._data["availability"]
+
+    @property
+    def references(self) -> list[str]:
+        """Reference URLs for the instrument."""
+
+        return self._data["references"]
+
+    @property
+    def data_links(self) -> list[str]:
+        """URLs where instrument data products can be accessed."""
+
+        return self._data.get("data_links", [])
+
+    @property
+    def notes(self) -> str | None:
+        """Additional notes, when available."""
+
+        return self._data.get("notes")
+
+    @property
+    def extensions(self) -> dict[str, Any]:
+        """Domain-specific instrument metadata extensions."""
+
+        return self._data.get("extensions", {})
+
+    @property
+    def extension_names(self) -> list[str]:
+        """Names of the extensions available for this instrument."""
+
+        return list(self.extensions)
+
+    @property
+    def family(self) -> list[str]:
+        """Identifiers of instruments in the same family."""
+
+        return self._data.get("family", [])
+
+    @property
+    def platform_companions(self) -> list[str]:
+        """Identifiers of other instruments on the same platform."""
+
+        return self._data.get("platform_companions", [])
+
+    @property
+    def has_bands(self) -> bool:
+        """Whether materialized spectral band definitions are available."""
+
+        bands = self.extensions.get("spectral", {}).get("bands")
+        return isinstance(bands, dict) and bool(bands)
+
+    @property
+    def has_srf(self) -> bool:
+        """Whether a spectral response function is available."""
+
+        srf = self.extensions.get("spectral", {}).get(
+            "spectral_response_function"
+        )
+        return isinstance(srf, dict) and bool(srf)
+
+    def bands(self) -> pd.DataFrame | None:
+        """Return spectral bands as a DataFrame, when available.
+
+        The DataFrame is indexed by band identifier. ``None`` is returned when
+        the instrument has no materialized spectral band definitions.
+        """
+
+        bands = self.extensions.get("spectral", {}).get("bands")
+        if not isinstance(bands, dict) or not bands:
+            return None
+
+        import pandas as pd
+
+        frame = pd.DataFrame.from_dict(bands, orient="index")
+        frame.index.name = "band"
+        return frame
+
+    def srf(self) -> pd.DataFrame | None:
+        """Return the spectral response function as a DataFrame, when available.
+
+        ``None`` is returned when the instrument has no spectral response
+        function in the catalogue.
+        """
+
+        srf = self.extensions.get("spectral", {}).get(
+            "spectral_response_function"
+        )
+        if not isinstance(srf, dict) or not srf:
+            return None
+
+        import pandas as pd
+
+        return pd.DataFrame.from_dict(srf, orient="columns")
+
+    def __repr__(self) -> str:
+        """Return the instrument identifier and name."""
+
+        return f"Instrument({self.id}: {self.name})"
+
+    def __str__(self) -> str:
+        """Return a concise human-readable representation."""
+
+        return f"{self.id}: {self.name}"
+
+    def to_dict(self) -> dict[str, Any]:
+        """Return an independent dictionary containing the instrument record."""
+
+        return deepcopy(self._data)
 
 
-def _create_catalogue():
-    """Creates the catalogue object locally available."""
+def _create_catalogue() -> tuple[Catalogue, Instruments]:
+    """Create the catalogue and its shared instrument collection."""
 
-    catalogue = _load_JSON()
-    # instruments_class = {}
-    for key, value in catalogue["instruments"].items():
-        catalogue["instruments"][key] = Instrument(value)
+    catalogue_data = _load_JSON()
+    instrument_objects = {
+        key: Instrument(value)
+        for key, value in catalogue_data["instruments"].items()
+    }
+    instrument_collection = Instruments(instrument_objects, frozen_box=True)
 
-    return Catalogue(catalogue), Instruments(catalogue["instruments"], frozen_box=True)
+    return (
+        Catalogue(catalogue_data, instruments=instrument_collection),
+        instrument_collection,
+    )
+
 
 catalogue, instruments = _create_catalogue()
