@@ -21,6 +21,9 @@
 <a href="https://github.com/awesome-spectral-indices/xeo/actions/workflows/update_catalogue.yml" target="_blank">
     <img src="https://github.com/awesome-spectral-indices/xeo/actions/workflows/update_catalogue.yml/badge.svg" alt="Awesome Earth Observation Instruments">
 </a>
+<a href="https://github.com/awesome-spectral-indices/xeo/actions/workflows/tests.yml" target="_blank">
+    <img src="https://github.com/awesome-spectral-indices/xeo/actions/workflows/tests.yml/badge.svg" alt="tests">
+</a>
 <a href="https://github.com/sponsors/davemlz" target="_blank">
     <img src="https://img.shields.io/badge/GitHub%20Sponsors-Donate-ff69b4.svg" alt="GitHub Sponsors">
 </a>
