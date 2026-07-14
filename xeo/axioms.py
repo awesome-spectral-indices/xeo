@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from copy import deepcopy
+from datetime import date
 from typing import TYPE_CHECKING, Any
 
 from box import Box
@@ -72,6 +73,136 @@ class Catalogue(object):
         """Return a concise human-readable representation."""
 
         return f"{self.name} (v{self.version})"
+
+    def search(self, **kwargs: Any) -> Instruments:
+        """Search instruments using core metadata and spectral availability.
+
+        Search values are matched exactly, except that ``start_date`` also
+        accepts inclusive intervals formatted as
+        ``YYYY-MM-DD/YYYY-MM-DD``. Different properties are combined with AND.
+        A list supplied for one property uses OR, and list-valued instrument
+        properties such as ``operator`` and ``platform`` match when any
+        requested value is present.
+
+        Parameters
+        ----------
+        **kwargs
+            Required instrument properties to match. ``has_srf`` and
+            ``has_bands`` are also accepted as boolean filters.
+
+        Returns
+        -------
+        Instruments
+            A frozen collection containing the matching instruments in
+            catalogue order.
+
+        Examples
+        --------
+        >>> import xeo
+        >>> result = xeo.catalogue.search(operator=["ESA", "NASA"])
+        >>> "MSI_S2A" in result and "OLI_L8" in result
+        True
+        >>> all(item.has_srf for item in xeo.catalogue.search(has_srf=True).values())
+        True
+        >>> list(xeo.catalogue.search(start_date="2000-01-01/2003-01-01"))
+        ['MODIS_AQUA']
+        """
+
+        searchable_properties = (
+            "id",
+            "name",
+            "acronym",
+            "type",
+            "platform_type",
+            "platform",
+            "operator",
+            "start_date",
+            "status",
+            "availability",
+            "references",
+            "has_srf",
+            "has_bands",
+        )
+        invalid_properties = set(kwargs).difference(searchable_properties)
+        if invalid_properties:
+            invalid = ", ".join(sorted(invalid_properties))
+            allowed = ", ".join(searchable_properties)
+            raise ValueError(
+                f"unknown search properties: {invalid}. Allowed properties: {allowed}"
+            )
+
+        for property_name in ("has_srf", "has_bands"):
+            if property_name in kwargs and not isinstance(kwargs[property_name], bool):
+                raise TypeError(f"{property_name} must be a boolean")
+
+        def parse_start_date_interval(value: Any) -> Any:
+            if not isinstance(value, str) or "/" not in value:
+                return value
+            if value.count("/") != 1:
+                raise ValueError(
+                    "start_date intervals must use YYYY-MM-DD/YYYY-MM-DD"
+                )
+
+            start_text, end_text = value.split("/")
+            try:
+                start = date.fromisoformat(start_text)
+                end = date.fromisoformat(end_text)
+            except ValueError as error:
+                raise ValueError(
+                    "start_date intervals must use YYYY-MM-DD/YYYY-MM-DD"
+                ) from error
+
+            if start.isoformat() != start_text or end.isoformat() != end_text:
+                raise ValueError(
+                    "start_date intervals must use YYYY-MM-DD/YYYY-MM-DD"
+                )
+            if start > end:
+                raise ValueError(
+                    "start_date interval beginning must not be after its end"
+                )
+            return start, end
+
+        requested_values = {
+            property_name: query if isinstance(query, list) else [query]
+            for property_name, query in kwargs.items()
+        }
+        if "start_date" in requested_values:
+            requested_values["start_date"] = [
+                parse_start_date_interval(value)
+                for value in requested_values["start_date"]
+            ]
+
+        def matches(
+            instrument: Instrument,
+            property_name: str,
+            requested: list[Any],
+        ) -> bool:
+            instrument_value = getattr(instrument, property_name)
+
+            if property_name == "start_date":
+                instrument_date = date.fromisoformat(instrument_value)
+                for value in requested:
+                    if isinstance(value, tuple):
+                        start, end = value
+                        if start <= instrument_date <= end:
+                            return True
+                    elif instrument_value == value:
+                        return True
+                return False
+
+            if isinstance(instrument_value, list):
+                return any(value in instrument_value for value in requested)
+            return instrument_value in requested
+
+        results = {
+            instrument_id: instrument
+            for instrument_id, instrument in self.instruments.items()
+            if all(
+                matches(instrument, property_name, requested)
+                for property_name, requested in requested_values.items()
+            )
+        }
+        return Instruments(results, frozen_box=True)
 
     def to_dict(self) -> dict[str, Any]:
         """Return an independent dictionary containing the raw catalogue."""
