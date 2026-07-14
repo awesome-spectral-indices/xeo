@@ -49,7 +49,7 @@ The catalogue is the source of the instrument records; `xeo` is the Python inter
 # Installation
 
 > [!NOTE]
-> The PyPI and conda-forge packages have not been published yet. The commands below will become available with the first release on each channel.
+> The conda-forge package has not been published yet. The commands below will become available with the first release on each channel.
 
 Install `xeo` from PyPI:
 
