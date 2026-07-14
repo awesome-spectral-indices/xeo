@@ -8,4 +8,4 @@ catalogue = requests.get(
 ).json()
 # Save the dict as json file
 with open("./xeo/data/catalogue.json", "w") as fp:
-    json.dump(catalogue, fp, indent=4, sort_keys=True)
+    json.dump(catalogue, fp, indent=4, sort_keys=False)
