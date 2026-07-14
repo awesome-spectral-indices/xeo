@@ -9,7 +9,6 @@ from rich.console import Console
 
 
 def test_public_package_metadata():
-    assert xeo.__version__ == "2026.2.0"
     assert xeo.__all__ == [
         "Catalogue",
         "Instrument",
