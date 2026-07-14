@@ -1,37 +1,40 @@
 name: Awesome Earth Observation Instruments
+
 on:
   workflow_dispatch:
   schedule:
-    - cron:  '0 0 * * *'
+    - cron: "0 0 * * *"
+
+permissions:
+  contents: write
 
 jobs:
-  build:
+  update:
     runs-on: ubuntu-latest
+
     steps:
-      - name: checkout
-        uses: actions/checkout@v2
-      - name: python
-        uses: actions/setup-python@v2
+      - name: Check out repository
+        uses: actions/checkout@v4
         with:
-          python-version: '3.8'          
-      - name: dependencies
+          ref: main
+
+      - name: Download latest catalogue
         run: |
-          python -m pip install --upgrade pip
-          pip install requests
-      - name: execute        
+          curl --fail --location \
+            https://raw.githubusercontent.com/awesome-spectral-indices/awesome-earth-observation-instruments/main/catalogue/catalogue.json \
+            --output xeo/data/catalogue.json
+
+      - name: Commit and push changes
         run: |
-          python ./.github/scripts/update_catalogue.py
-      - name: commit
-        continue-on-error: true
-        run: |
-          today=$(date +"%Y-%m-%d %H:%M:%S")
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add -A
-          git commit -m "Updated Awesome Earth Observation Instruments Catalogue ${today} UTC" -a
-      - name: push
-        continue-on-error: true
-        uses: ad-m/github-push-action@v0.6.0
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: main
+
+          git add xeo/data/catalogue.json
+
+          if git diff --cached --quiet; then
+            echo "Catalogue is already up to date."
+          else
+            today=$(date -u +"%Y-%m-%d %H:%M:%S")
+            git commit -m "Updated Awesome Earth Observation Instruments Catalogue ${today} UTC"
+            git push origin HEAD:main
+          fi
