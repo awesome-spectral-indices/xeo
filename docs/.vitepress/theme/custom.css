@@ -1,0 +1,38 @@
+/* The landing page is intentionally black in both color modes. */
+.xeo-home {
+  --vp-c-bg: #000;
+  --vp-c-bg-alt: #000;
+  --vp-c-bg-elv: #111;
+  --vp-c-bg-soft: #111;
+  --vp-c-text-1: #fff;
+  --vp-c-text-2: #d4d4d8;
+  --vp-c-text-3: #a1a1aa;
+  --vp-c-divider: #27272a;
+  --vp-c-gutter: #18181b;
+  --vp-nav-bg-color: #000;
+  --vp-nav-screen-bg-color: #000;
+
+  background-color: #000;
+  color-scheme: dark;
+}
+
+.xeo-home .VPNavBar,
+.xeo-home .VPNavScreen,
+.xeo-home .VPContent,
+.xeo-home .VPHome,
+.xeo-home .VPFooter {
+  background-color: #000;
+}
+
+/* Keep the collapsed navigation readable on the black landing page. */
+.xeo-home .VPNavScreenMenuLink,
+.xeo-home .VPNavBarTitle,
+.xeo-home .VPNavBarHamburger {
+  color: #fff;
+}
+
+.xeo-home .VPNavBarHamburger .top,
+.xeo-home .VPNavBarHamburger .middle,
+.xeo-home .VPNavBarHamburger .bottom {
+  background-color: #fff;
+}

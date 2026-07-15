@@ -39,3 +39,9 @@ nosetests.xml
 .mr.developer.cfg
 .project
 .pydevproject
+
+# VitePress build artifacts
+node_modules/
+docs/.vitepress/cache/
+docs/.vitepress/dist/
+docs/.vitepress/.temp/

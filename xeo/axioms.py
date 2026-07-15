@@ -15,7 +15,7 @@ if TYPE_CHECKING:
 
 
 class Catalogue(object):
-    """Awesome Earth Observation Instruments catalogue.
+    """Awesome Earth Observation Instruments catalogue. 🐈
 
     Parameters
     ----------
@@ -213,7 +213,7 @@ class Catalogue(object):
 class Instruments(Box):
     """Collection of instruments in the catalogue.
 
-    Instruments support both mapping and attribute access.
+    Instruments support both mapping and attribute access. 😺
 
     Examples
     --------
@@ -417,7 +417,7 @@ class Instrument(object):
 
     @property
     def family(self) -> list[str]:
-        """Identifiers of instruments in the same family."""
+        """Identifiers of instruments in the same family. 🐈‍⬛"""
 
         return self._data.get("family", [])
 
@@ -530,7 +530,7 @@ class Instrument(object):
         return frame
 
     def srf(self) -> pd.DataFrame | None:
-        """Return the spectral response function as a DataFrame, when available.
+        """Return the spectral response function as a DataFrame, when available. 🐱
 
         ``None`` is returned when the instrument has no spectral response
         function in the catalogue.

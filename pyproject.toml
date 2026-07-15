@@ -42,3 +42,6 @@ exclude = ["tests*"]
 
 [tool.setuptools.package-data]
 "xeo.data" = ["*.json"]
+
+[tool.griffe2md]
+docstring_style = "numpy"
