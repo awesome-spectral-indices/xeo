@@ -52,48 +52,42 @@ Awesome Earth Observation Instruments (v0.1.0)
 - [**name**](#xeo.Catalogue.name) – Name of the catalogue.
 - [**version**](#xeo.Catalogue.version) – Version of the catalogue.
 
-#### `xeo.Catalogue.data`
-
+#### `data` {#xeo.Catalogue.data}
 ```python
 data = catalogue
 ```
 
 Raw, JSON-serializable catalogue data.
 
-#### `xeo.Catalogue.href`
-
+#### `href` {#xeo.Catalogue.href}
 ```python
 href = catalogue['link']
 ```
 
 URL of the catalogue. Equivalent to :attr:`link`.
 
-#### `xeo.Catalogue.instruments`
-
+#### `instruments` {#xeo.Catalogue.instruments}
 ```python
 instruments = instruments
 ```
 
 Instruments available in the catalogue.
 
-#### `xeo.Catalogue.link`
-
+#### `link` {#xeo.Catalogue.link}
 ```python
 link = catalogue['link']
 ```
 
 URL of the catalogue.
 
-#### `xeo.Catalogue.name`
-
+#### `name` {#xeo.Catalogue.name}
 ```python
 name = catalogue['name']
 ```
 
 Name of the catalogue.
 
-#### `xeo.Catalogue.search`
-
+#### `search` {#xeo.Catalogue.search}
 ```python
 search(**kwargs)
 ```
@@ -131,16 +125,14 @@ True
 ['MODIS_AQUA']
 ```
 
-#### `xeo.Catalogue.to_dict`
-
+#### `to_dict` {#xeo.Catalogue.to_dict}
 ```python
 to_dict()
 ```
 
 Return an independent dictionary containing the raw catalogue.
 
-#### `xeo.Catalogue.version`
-
+#### `version` {#xeo.Catalogue.version}
 ```python
 version = catalogue['version']
 ```
@@ -203,24 +195,21 @@ Instrument(MSI_S2A: MultiSpectral Instrument)
 - [**status**](#xeo.Instrument.status) (<code>[str](#str)</code>) – Instrument lifecycle status.
 - [**type**](#xeo.Instrument.type) (<code>[str](#str)</code>) – Instrument sensing modality.
 
-#### `xeo.Instrument.acronym`
-
+#### `acronym` {#xeo.Instrument.acronym}
 ```python
 acronym: str
 ```
 
 Instrument acronym.
 
-#### `xeo.Instrument.availability`
-
+#### `availability` {#xeo.Instrument.availability}
 ```python
 availability: str
 ```
 
 Instrument data accessibility level.
 
-#### `xeo.Instrument.bands`
-
+#### `bands` {#xeo.Instrument.bands}
 ```python
 bands()
 ```
@@ -230,56 +219,49 @@ Return spectral bands as a DataFrame, when available.
 The DataFrame is indexed by band identifier. ``None`` is returned when
 the instrument has no materialized spectral band definitions.
 
-#### `xeo.Instrument.data`
-
+#### `data` {#xeo.Instrument.data}
 ```python
 data: dict[str, Any]
 ```
 
 Complete instrument record from the catalogue.
 
-#### `xeo.Instrument.data_links`
-
+#### `data_links` {#xeo.Instrument.data_links}
 ```python
 data_links: list[str]
 ```
 
 URLs where instrument data products can be accessed.
 
-#### `xeo.Instrument.end_date`
-
+#### `end_date` {#xeo.Instrument.end_date}
 ```python
 end_date: str | None
 ```
 
 End of instrument operation, when available.
 
-#### `xeo.Instrument.extension_names`
-
+#### `extension_names` {#xeo.Instrument.extension_names}
 ```python
 extension_names: list[str]
 ```
 
 Names of the extensions available for this instrument.
 
-#### `xeo.Instrument.extensions`
-
+#### `extensions` {#xeo.Instrument.extensions}
 ```python
 extensions: dict[str, Any]
 ```
 
 Domain-specific instrument metadata extensions.
 
-#### `xeo.Instrument.family`
-
+#### `family` {#xeo.Instrument.family}
 ```python
 family: list[str]
 ```
 
 Identifiers of instruments in the same family. 🐈‍⬛
 
-#### `xeo.Instrument.get_data_access`
-
+#### `get_data_access` {#xeo.Instrument.get_data_access}
 ```python
 get_data_access(provider='ee', processing_level='primary')
 ```
@@ -312,88 +294,77 @@ or processing level is valid but unavailable for this instrument.
 True
 ```
 
-#### `xeo.Instrument.has_bands`
-
+#### `has_bands` {#xeo.Instrument.has_bands}
 ```python
 has_bands: bool
 ```
 
 Whether materialized spectral band definitions are available.
 
-#### `xeo.Instrument.has_srf`
-
+#### `has_srf` {#xeo.Instrument.has_srf}
 ```python
 has_srf: bool
 ```
 
 Whether a spectral response function is available.
 
-#### `xeo.Instrument.id`
-
+#### `id` {#xeo.Instrument.id}
 ```python
 id: str
 ```
 
 Instrument identifier.
 
-#### `xeo.Instrument.name`
-
+#### `name` {#xeo.Instrument.name}
 ```python
 name: str
 ```
 
 Full instrument name.
 
-#### `xeo.Instrument.notes`
-
+#### `notes` {#xeo.Instrument.notes}
 ```python
 notes: str | None
 ```
 
 Additional notes, when available.
 
-#### `xeo.Instrument.operator`
-
+#### `operator` {#xeo.Instrument.operator}
 ```python
 operator: list[str]
 ```
 
 Organizations operating the instrument.
 
-#### `xeo.Instrument.platform`
-
+#### `platform` {#xeo.Instrument.platform}
 ```python
 platform: list[str]
 ```
 
 Platforms carrying the instrument.
 
-#### `xeo.Instrument.platform_companions`
-
+#### `platform_companions` {#xeo.Instrument.platform_companions}
 ```python
 platform_companions: list[str]
 ```
 
 Identifiers of other instruments on the same platform.
 
-#### `xeo.Instrument.platform_type`
-
+#### `platform_type` {#xeo.Instrument.platform_type}
 ```python
 platform_type: str
 ```
 
 Class of platform carrying the instrument.
 
-#### `xeo.Instrument.references`
-
+#### `references` {#xeo.Instrument.references}
 ```python
 references: list[str]
 ```
 
 Reference URLs for the instrument.
 
-#### `xeo.Instrument.srf`
-
+#### `srf` {#xeo.Instrument.srf}
 ```python
 srf()
 ```
@@ -403,32 +374,28 @@ Return the spectral response function as a DataFrame, when available. 🐱
 ``None`` is returned when the instrument has no spectral response
 function in the catalogue.
 
-#### `xeo.Instrument.start_date`
-
+#### `start_date` {#xeo.Instrument.start_date}
 ```python
 start_date: str
 ```
 
 Start of instrument operation.
 
-#### `xeo.Instrument.status`
-
+#### `status` {#xeo.Instrument.status}
 ```python
 status: str
 ```
 
 Instrument lifecycle status.
 
-#### `xeo.Instrument.to_dict`
-
+#### `to_dict` {#xeo.Instrument.to_dict}
 ```python
 to_dict()
 ```
 
 Return an independent dictionary containing the instrument record.
 
-#### `xeo.Instrument.type`
-
+#### `type` {#xeo.Instrument.type}
 ```python
 type: str
 ```

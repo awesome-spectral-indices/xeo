@@ -86,6 +86,19 @@ def _public_api_only(markdown: str) -> str:
         r"#xeo.\1",
         public_markdown,
     )
+
+    # Keep class names qualified, but use compact member labels in the page
+    # outline. Custom anchors preserve griffe2md's fully qualified links and
+    # avoid collisions between repeated names such as ``to_dict``.
+    public_markdown = re.sub(
+        r"^#### `xeo\.(Catalogue|Instrument|Instruments)\.([^`]+)`\s*$",
+        lambda match: (
+            f"#### `{match.group(2)}` "
+            f"{{#xeo.{match.group(1)}.{match.group(2)}}}"
+        ),
+        public_markdown,
+        flags=re.MULTILINE,
+    )
     return public_markdown
 
 
