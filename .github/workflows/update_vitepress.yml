@@ -1,0 +1,53 @@
+name: update_vitepress
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Offset from the catalogue workflow to avoid simultaneous pushes.
+    - cron: "15 0 * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install .
+          python -m pip install griffe2md nbconvert
+
+      - name: Generate VitePress pages
+        run: python docs/vitepress.py
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+
+          git add --all -- \
+            docs/api.md \
+            docs/contributing.md \
+            docs/tutorials
+
+          if git diff --cached --quiet; then
+            echo "VitePress pages are already up to date."
+          else
+            today=$(date -u +"%Y-%m-%d %H:%M:%S")
+            git commit -m "Updated VitePress pages ${today} UTC"
+            git push origin HEAD:main
+          fi
