@@ -4,6 +4,7 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   title: "xeo",
   description: "Awesome Earth Observation Instruments in Python",
+  base: '/xeo/',
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
