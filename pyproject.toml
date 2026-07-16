@@ -25,7 +25,6 @@ classifiers=[
 dependencies = [
   "pandas>=2.0.3",
   "python-box>=6.0",
-  "rich>=14.3.3",
 ]
 
 [project.urls]

@@ -5,8 +5,6 @@ from datetime import date
 from typing import TYPE_CHECKING, Any
 
 from box import Box
-from rich.console import Console, RenderResult
-from rich.table import Table
 
 from .utils import _load_JSON
 
@@ -233,64 +231,6 @@ class Instruments(Box):
         """Return the available instrument identifiers."""
 
         return f"{list(self.keys())}"
-
-    def __rich_console__(self, console: Console, options) -> RenderResult:
-        table = Table(title="Awesome Earth Observation Instruments")
-
-        table.add_column("Id", style="cyan", no_wrap=True)
-        table.add_column("Acronym")
-        table.add_column("Name")
-        table.add_column("Platform")
-        table.add_column("Platform Type")
-        table.add_column("Type")
-        table.add_column("Status")
-
-        status_colors = {
-            "operational": "green",
-            "retired": "red",
-            "planned": "blue",
-            "experimental": "yellow",
-        }
-        type_colors = {
-            "hyperspectral": "chartreuse2",
-            "multispectral": "orange1",
-            "radar": "white",
-            "lidar": "deep_sky_blue4",
-            "rgb": "dark_green",
-            "other": "orchid1",
-        }
-        platform_colors = {
-            "satellite": "deep_sky_blue3",
-            "airborne": "deep_sky_blue3",
-            "uav": "deep_sky_blue2",
-            "terrestrial": "deep_sky_blue1",
-        }
-
-        for instrument in self.values():
-            status_color = status_colors.get(instrument.status, "white")
-            styled_status = (
-                f"[{status_color}]{instrument.status}[/{status_color}]"
-            )
-
-            type_color = type_colors.get(instrument.type, "white")
-            styled_type = f"[{type_color}]{instrument.type}[/{type_color}]"
-
-            platform_color = platform_colors.get(instrument.platform_type, "white")
-            styled_platform = (
-                f"[{platform_color}]{instrument.platform_type}[/{platform_color}]"
-            )
-
-            table.add_row(
-                instrument.id,
-                instrument.acronym,
-                instrument.name,
-                ", ".join(instrument.platform),
-                styled_platform,
-                styled_type,
-                styled_status,
-            )
-
-        yield table
 
 
 class Instrument(object):

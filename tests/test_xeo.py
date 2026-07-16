@@ -1,11 +1,9 @@
 import json
 from importlib.resources import files
-from io import StringIO
 
 import pandas as pd
 import pytest
 import xeo
-from rich.console import Console
 
 
 def test_public_package_metadata():
@@ -248,17 +246,6 @@ def test_get_data_access_returns_none_when_valid_access_point_is_unavailable():
 def test_get_data_access_rejects_unknown_options(kwargs, message):
     with pytest.raises(ValueError, match=message):
         xeo.instruments.MSI_S2A.get_data_access(**kwargs)
-
-
-def test_rich_instrument_table_still_renders():
-    output = StringIO()
-    console = Console(file=output, color_system=None, width=160)
-
-    console.print(xeo.instruments)
-
-    rendered = output.getvalue()
-    assert "Awesome Earth Observation Instruments" in rendered
-    assert "MSI_S2A" in rendered
 
 
 def test_catalogue_is_packaged_under_xeo():

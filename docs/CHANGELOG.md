@@ -2,6 +2,13 @@
 
 All notable changes to `xeo` are documented in this file.
 
+## 0.2.1 (upcoming)
+
+### Removed
+
+- Removed rich terminal table rendering from the instrument collection to keep the package minimal.
+- Removed Rich from the runtime dependencies.
+
 ## 0.2.0
 
 This is the first complete release of `xeo`, the Python interface to the Awesome Earth Observation Instruments catalogue.
