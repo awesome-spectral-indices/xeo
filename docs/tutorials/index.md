@@ -11,3 +11,4 @@ Learn the `xeo` API through these step-by-step tutorials.
 - [05 — Raw data and DataFrame workflows](./05_raw_data_and_dataframe_workflows)
 - [06 — Data access points](./06_data_access)
 - [07 — Advanced catalogue search](./07_advanced_search)
+- [08 — Plotting spectral data](./08_plotting)

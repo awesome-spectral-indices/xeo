@@ -69,6 +69,12 @@ Install `xeo` from PyPI:
 python -m pip install xeo
 ```
 
+Plotting is optional. Install `xeo` with Matplotlib support when you need it:
+
+```bash
+python -m pip install "xeo[plot]"
+```
+
 Or install it from conda-forge:
 
 ```bash
@@ -173,6 +179,33 @@ if msi.has_srf:
 
 Both `bands()` and `srf()` return `None` when the requested data is not available.
 
+## Plot bands and spectral response functions
+
+Install the optional plotting extra, then pass one instrument id, a list of ids, a dictionary selecting bands, or a list of per-instrument dictionaries:
+
+```python
+bands_ax = xeo.plot_bands({"MSI_S2A": ["B2", "B3", "B4", "B8"]})
+srf_ax = xeo.plot_srf(["MSI_S2A", "OLI_L8"], figsize=(10, 6))
+```
+
+Dictionary selections can attach native Matplotlib styles to individual bands:
+
+```python
+ax = xeo.plot_srf(
+    [
+        {
+            "MSI_S2A": [
+                {"B4": {"color": "red", "linestyle": "--", "linewidth": 2}}
+            ]
+        },
+        {"OLI_L8": [{"B5": {"color": "blue", "linewidth": 2}}]},
+    ],
+    title="Selected red and near-infrared responses",
+)
+```
+
+Both functions return a Matplotlib `Axes`, so the complete Matplotlib API remains available for further customization.
+
 ## Discover data access points
 
 `get_data_access()` retrieves the catalogue entry for a provider and processing level. It defaults to the primary Google Earth Engine collection:
@@ -200,13 +233,14 @@ Treat `.data` as read-only. Use `.to_dict()` when downstream code needs to modif
 
 The tutorial notebooks provide complete, executable examples:
 
-1. [Getting started](docs/tutorials/01_getting_started.ipynb)
-2. [Exploring instruments](docs/tutorials/02_exploring_instruments.ipynb)
-3. [Spectral bands](docs/tutorials/03_spectral_bands.ipynb)
-4. [Spectral response functions](docs/tutorials/04_spectral_response_functions.ipynb)
-5. [Raw data and DataFrame workflows](docs/tutorials/05_raw_data_and_dataframe_workflows.ipynb)
-6. [Data access](docs/tutorials/06_data_access.ipynb)
-7. [Advanced search](docs/tutorials/07_advanced_search.ipynb)
+1. [Getting started](docs/notebooks/01_getting_started.ipynb)
+2. [Exploring instruments](docs/notebooks/02_exploring_instruments.ipynb)
+3. [Spectral bands](docs/notebooks/03_spectral_bands.ipynb)
+4. [Spectral response functions](docs/notebooks/04_spectral_response_functions.ipynb)
+5. [Raw data and DataFrame workflows](docs/notebooks/05_raw_data_and_dataframe_workflows.ipynb)
+6. [Data access](docs/notebooks/06_data_access.ipynb)
+7. [Advanced search](docs/notebooks/07_advanced_search.ipynb)
+8. [Plotting spectral data](docs/notebooks/08_plotting.ipynb)
 
 # Contributing
 

@@ -10,6 +10,12 @@
 python -m pip install xeo
 ```
 
+Plotting support is an optional extra:
+
+```bash
+python -m pip install "xeo[plot]"
+```
+
 The package is also planned for conda-forge. Once it is available there, install it with:
 
 ```bash
@@ -85,6 +91,34 @@ if msi.has_srf:
 ```
 
 `bands()` is indexed by band identifier. `srf()` contains a `wavelength` column and one response column per band. Either method returns `None` when its data are unavailable.
+
+## Plot bands and SRFs
+
+With the optional plotting extra installed, plot all bands for one or more instruments by passing their ids:
+
+```python
+bands_ax = xeo.plot_bands(["MSI_S2A", "OLI_L8"])
+```
+
+Use a dictionary to select bands and attach native Matplotlib styles. A list of dictionaries can give each instrument its own band selection and styling:
+
+```python
+srf_ax = xeo.plot_srf(
+    [
+        {
+            "MSI_S2A": [
+                {"B3": {"color": "green"}},
+                {"B4": {"color": "red", "linestyle": "--", "linewidth": 2}},
+            ]
+        },
+        {"OLI_L8": [{"B5": {"color": "blue", "linewidth": 2}}]},
+    ],
+    title="Selected instrument responses",
+    figsize=(10, 6),
+)
+```
+
+Both functions return a Matplotlib `Axes`. Pass an existing `ax` or use the returned object to customize labels, limits, legends, themes, and any other plot details.
 
 ## Discover data access
 

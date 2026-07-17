@@ -13,6 +13,11 @@ xeo - Earth observation instruments in Python.
 - [**Instrument**](#xeo.Instrument) – Earth observation instrument from the catalogue.
 - [**Instruments**](#xeo.Instruments) – Collection of instruments in the catalogue.
 
+**Functions:**
+
+- [**plot_bands**](#xeo.plot_bands) – Plot instrument band ranges along the wavelength axis.
+- [**plot_srf**](#xeo.plot_srf) – Plot spectral response functions for one or more instruments.
+
 ### `xeo.Catalogue`
 
 ```python
@@ -418,4 +423,82 @@ Instruments support both mapping and attribute access. 😺
 Instrument(MSI_S2A: MultiSpectral Instrument)
 >>> xeo.instruments["MSI_S2A"] is xeo.instruments.MSI_S2A
 True
+```
+
+### `xeo.plot_bands`
+
+```python
+plot_bands(instruments, *, ax=None, figsize=None, title='Spectral bands', band_labels=True)
+```
+
+Plot instrument band ranges along the wavelength axis.
+
+Overlapping bands are placed in compact sub-lanes within the instrument's
+row. Non-overlapping bands reuse the same lane.
+
+**Parameters:**
+
+- **instruments** (<code>str, sequence, or dict</code>) – One instrument id, several ids, a dictionary mapping instrument ids to
+selected bands, or a list of such dictionaries. A selection can be one
+band id, a sequence of band ids, or styled bands such as
+``{"MSI_S2A": [{"B4": {"color": "red", "linewidth": 2}}]}``.
+A list of dictionaries can define different selections and styles for
+each instrument. Style dictionaries accept Matplotlib ``barh`` keyword
+arguments.
+- **ax** (<code>[Axes](#matplotlib.axes.Axes)</code>) – Axes on which to draw. A new figure and axes are created by default.
+- **figsize** (<code>tuple of float</code>) – Figure size in inches when creating new axes. It cannot be combined
+with ``ax``.
+- **title** (<code>[str](#str) or None</code>) – Axes title. Use ``None`` to leave the title unset.
+- **band_labels** (<code>[bool](#bool)</code>) – Whether to place band ids on their wavelength ranges.
+
+**Returns:**
+
+- <code>[Axes](#matplotlib.axes.Axes)</code> – The axes containing the plot.
+
+
+**Examples:**
+
+```pycon
+>>> import xeo
+>>> ax = xeo.plot_bands({"MSI_S2A": ["B2", "B3", "B4"]})
+```
+
+### `xeo.plot_srf`
+
+```python
+plot_srf(instruments, *, ax=None, figsize=None, title='Spectral response functions', band_labels=True, legend=True)
+```
+
+Plot spectral response functions for one or more instruments.
+
+Curves use one default color per instrument. Band ids are placed near their
+response peaks and distributed across vertical label levels when nearby
+peaks would otherwise collide.
+
+**Parameters:**
+
+- **instruments** (<code>str, sequence, or dict</code>) – One instrument id, several ids, a dictionary mapping instrument ids to
+selected bands, or a list of such dictionaries. A selection can be one
+band id, a sequence of band ids, or styled bands such as
+``{"MSI_S2A": [{"B4": {"color": "red", "linestyle": "--"}}]}``.
+A list of dictionaries can define different selections and styles for
+each instrument. Style dictionaries accept Matplotlib ``plot`` keyword
+arguments.
+- **ax** (<code>[Axes](#matplotlib.axes.Axes)</code>) – Axes on which to draw. A new figure and axes are created by default.
+- **figsize** (<code>tuple of float</code>) – Figure size in inches when creating new axes. It cannot be combined
+with ``ax``.
+- **title** (<code>[str](#str) or None</code>) – Axes title. Use ``None`` to leave the title unset.
+- **band_labels** (<code>[bool](#bool)</code>) – Whether to place band ids near the response peaks.
+- **legend** (<code>[bool](#bool)</code>) – Whether to add an instrument legend.
+
+**Returns:**
+
+- <code>[Axes](#matplotlib.axes.Axes)</code> – The axes containing the plot.
+
+
+**Examples:**
+
+```pycon
+>>> import xeo
+>>> ax = xeo.plot_srf({"MSI_S2A": ["B2", "B3", "B4"]})
 ```

@@ -13,6 +13,8 @@ def test_public_package_metadata():
         "Instruments",
         "catalogue",
         "instruments",
+        "plot_bands",
+        "plot_srf",
     ]
 
 

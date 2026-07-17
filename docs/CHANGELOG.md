@@ -4,6 +4,17 @@ All notable changes to `xeo` are documented in this file.
 
 ## 0.2.1 (upcoming)
 
+### Added
+
+- Added `plot_bands()` for Gantt-style spectral-band plots with automatic sub-lanes for overlapping bands.
+- Added `plot_srf()` for multi-instrument spectral response curves with peak labels and collision-aware label placement.
+- Added flexible instrument and band selection, including lists of per-instrument selection dictionaries and per-band Matplotlib styles.
+- Added the optional `plot` dependency extra for installing Matplotlib without making it a core dependency.
+
+### Documentation
+
+- Added a plotting tutorial covering input forms, overlapping bands, per-band Matplotlib styles, SRF comparisons, and axes customization.
+
 ### Removed
 
 - Removed rich terminal table rendering from the instrument collection to keep the package minimal.

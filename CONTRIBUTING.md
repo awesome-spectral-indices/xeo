@@ -37,7 +37,7 @@ git clone https://github.com/YOUR-USERNAME/xeo.git
 cd xeo
 conda create --name xeo-dev python=3.10
 conda activate xeo-dev
-python -m pip install --editable .
+python -m pip install --editable ".[plot]"
 python -m pip install pytest tox jupyter nbformat nbconvert
 ```
 

@@ -8,6 +8,16 @@ __all__ = [
     "Instruments",
     "catalogue",
     "instruments",
+    "plot_bands",
+    "plot_srf",
 ]
 
-from .xeo import Catalogue, Instrument, Instruments, catalogue, instruments
+from .xeo import (
+    Catalogue,
+    Instrument,
+    Instruments,
+    catalogue,
+    instruments,
+    plot_bands,
+    plot_srf,
+)
