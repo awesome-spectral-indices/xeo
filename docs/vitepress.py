@@ -137,6 +137,13 @@ def _tutorial_title(markdown: str, fallback: str) -> str:
     return heading.group(1) if heading else fallback.replace("_", " ").title()
 
 
+def _normalize_markdown(markdown: str) -> str:
+    """Remove generated trailing whitespace and normalize the final newline."""
+
+    lines = (line.rstrip() for line in markdown.splitlines())
+    return "\n".join(lines).strip() + "\n"
+
+
 def _write_notebook_assets(outputs: dict[str, bytes]) -> None:
     """Write assets emitted by nbconvert inside the tutorials directory."""
 
@@ -188,7 +195,7 @@ def generate_tutorials() -> None:
                 "output_files_dir": asset_directory.name,
             },
         )
-        markdown = markdown.lstrip()
+        markdown = _normalize_markdown(markdown)
 
         destination = TUTORIALS / f"{notebook.stem}.md"
         destination.write_text(
