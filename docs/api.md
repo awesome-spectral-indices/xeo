@@ -18,8 +18,7 @@ xeo - Earth observation instruments in Python.
 - [**plot_bands**](#xeo.plot_bands) – Plot instrument band ranges along the wavelength axis.
 - [**plot_srf**](#xeo.plot_srf) – Plot spectral response functions for one or more instruments.
 
-### `xeo.Catalogue`
-
+### `xeo.Catalogue` {#xeo.Catalogue}
 ```python
 Catalogue(catalogue, instruments=None)
 ```
@@ -144,8 +143,7 @@ version = catalogue['version']
 
 Version of the catalogue.
 
-### `xeo.Instrument`
-
+### `xeo.Instrument` {#xeo.Instrument}
 ```python
 Instrument(instrument)
 ```
@@ -407,8 +405,7 @@ type: str
 
 Instrument sensing modality.
 
-### `xeo.Instruments`
-
+### `xeo.Instruments` {#xeo.Instruments}
 Bases: <code>[Box](#box.Box)</code>
 
 Collection of instruments in the catalogue.
@@ -425,8 +422,7 @@ Instrument(MSI_S2A: MultiSpectral Instrument)
 True
 ```
 
-### `xeo.plot_bands`
-
+### `xeo.plot_bands` {#xeo.plot_bands}
 ```python
 plot_bands(instruments, *, ax=None, figsize=None, title='Spectral bands', band_labels=True)
 ```
@@ -463,8 +459,7 @@ with ``ax``.
 >>> ax = xeo.plot_bands({"MSI_S2A": ["B2", "B3", "B4"]})
 ```
 
-### `xeo.plot_srf`
-
+### `xeo.plot_srf` {#xeo.plot_srf}
 ```python
 plot_srf(instruments, *, ax=None, figsize=None, title='Spectral response functions', band_labels=True, legend=True)
 ```

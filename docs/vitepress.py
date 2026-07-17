@@ -93,6 +93,16 @@ def _public_api_only(markdown: str) -> str:
         public_markdown,
     )
 
+    # VitePress otherwise slugifies ``xeo.Catalogue`` as ``xeo-catalogue``,
+    # which does not match the fully qualified links emitted by griffe2md.
+    public_symbols = "|".join(re.escape(symbol) for symbol in PUBLIC_API_SYMBOLS)
+    public_markdown = re.sub(
+        rf"^### `(xeo\.(?:{public_symbols}))`\s*$",
+        r"### `\1` {#\1}",
+        public_markdown,
+        flags=re.MULTILINE,
+    )
+
     # Keep class names qualified, but use compact member labels in the page
     # outline. Custom anchors preserve griffe2md's fully qualified links and
     # avoid collisions between repeated names such as ``to_dict``.
