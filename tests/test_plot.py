@@ -1,6 +1,7 @@
 from unittest.mock import patch
 
 import matplotlib
+import pandas as pd
 import pytest
 import xeo
 
@@ -13,6 +14,28 @@ from xeo.plot import _annotation_levels, _import_matplotlib
 def close_figures():
     yield
     plt.close("all")
+
+
+@pytest.fixture(autouse=True)
+def local_srf_data(monkeypatch):
+    """Keep plotting tests independent from remote SRF resources."""
+
+    def synthetic_srf(instrument, *, refresh=False):
+        if not instrument.has_srf:
+            return None
+
+        bands = instrument.bands()
+        wavelengths = sorted(set(bands["center_wavelength"].astype(float)))
+        data = {"wavelength": wavelengths}
+        for band_id, band in bands.iterrows():
+            center = float(band["center_wavelength"])
+            data[band_id] = [
+                1.0 if wavelength == center else 0.0
+                for wavelength in wavelengths
+            ]
+        return pd.DataFrame(data)
+
+    monkeypatch.setattr(xeo.Instrument, "srf", synthetic_srf)
 
 
 def test_optional_matplotlib_dependency_has_a_clear_error():

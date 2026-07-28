@@ -2,6 +2,31 @@
 
 All notable changes to `xeo` are documented in this file.
 
+## 0.3.0 (Upcoming)
+
+### Added
+
+- Added lazy downloading of external spectral response function CSV resources.
+- Added a persistent, per-user SRF cache organized by catalogue version and instrument.
+- Added `Instrument.srf(refresh=True)` for explicitly replacing a cached SRF with the current remote resource.
+- Added `XEO_CACHE_DIR` support for selecting a custom writable cache root.
+- Added direct access to the required catalogue `contributors` property and support for contributor searches.
+- Added data-access support for the `lst`, `wst`, `grd`, `rtc`, and `slc` product levels.
+- Added `platformdirs` as a lightweight runtime dependency for cross-platform cache paths.
+
+### Changed
+
+- Updated the bundled Awesome Earth Observation Instruments catalogue to version 0.3.0.
+- Updated `Instrument.has_srf` and `Instrument.srf()` for URL-based SRF metadata while retaining compatibility with the earlier inline representation.
+- Made `plot_srf()` reuse the same on-demand SRF cache through `Instrument.srf()`.
+- Preserved new band properties such as `ne_delta_t` in the DataFrames returned by `Instrument.bands()`.
+- Updated spectral and plotting tests to run without live network access.
+
+### Documentation
+
+- Documented on-demand SRF downloads, persistent caching, offline reuse, explicit refreshes, and custom cache locations.
+- Documented contributor metadata and the expanded data-access product levels.
+
 ## 0.2.1
 
 ### Added

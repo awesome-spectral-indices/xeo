@@ -90,7 +90,7 @@ ax
 
 ## Plot spectral response functions
 
-`plot_srf()` draws one response curve per selected band. By default, curves share one color per instrument, the legend identifies instruments, and band ids are placed close to their response peaks with collision-aware offsets.
+`plot_srf()` draws one response curve per selected band. By default, curves share one color per instrument, the legend identifies instruments, and band ids are placed close to their response peaks with collision-aware offsets. It uses the same on-demand, per-user SRF cache as `Instrument.srf()`, so only the first use of a resource requires a download.
 
 
 ```python

@@ -2,7 +2,7 @@
 
 # 04 — Spectral response functions
 
-Spectral response functions (SRFs) are available for some instruments. Use `has_srf` before calling `srf()`. When no SRF exists, `srf()` returns `None`.
+Spectral response functions (SRFs) are available for some instruments. Use `has_srf` to check their catalogue metadata without downloading anything. When no SRF exists, `srf()` returns `None`.
 
 
 ```python
@@ -28,7 +28,7 @@ print("EMIT SRF result:", emit.srf())
 
 ## Load an available SRF
 
-The result contains a `wavelength` column followed by one response column per spectral band.
+The result contains a `wavelength` column followed by one response column per spectral band. On first use, `srf()` downloads the external CSV into a per-user cache organized by catalogue version. Later calls reuse the local file and work offline. Use `msi.srf(refresh=True)` to replace the cached copy with the current remote resource, or set `XEO_CACHE_DIR` to choose another writable cache root.
 
 
 ```python

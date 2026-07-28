@@ -16,7 +16,7 @@ Plotting support is an optional extra:
 python -m pip install "xeo[plot]"
 ```
 
-The package is also planned for conda-forge. Once it is available there, install it with:
+The package is also available from conda-forge:
 
 ```bash
 conda install -c conda-forge xeo
@@ -49,6 +49,7 @@ assert msi is xeo.instruments["MSI_S2A"]
 print(msi.name)
 print(msi.platform)
 print(msi.operator)
+print(msi.contributors)
 print(msi.status)
 ```
 
@@ -91,6 +92,8 @@ if msi.has_srf:
 ```
 
 `bands()` is indexed by band identifier. `srf()` contains a `wavelength` column and one response column per band. Either method returns `None` when its data are unavailable.
+
+SRFs are downloaded only when `srf()` or `plot_srf()` first needs them. `xeo` stores each raw CSV in a per-user cache organized by catalogue version, so later calls reuse the local file and can work offline. Use `msi.srf(refresh=True)` to fetch the current resource again, or set `XEO_CACHE_DIR` to select a custom writable cache location. Checking `has_srf` never accesses the network.
 
 ## Plot bands and SRFs
 
@@ -135,7 +138,7 @@ print(earth_engine)
 print(planetary_computer)
 ```
 
-Supported providers are `ee`, `planetary_computer`, `cdse`, and `eopf`. Supported processing levels are `primary`, `boa`, `toa`, and `raw`. Available entries contain `stac_endpoint`, `collection`, and `docs`; unavailable combinations return `None`.
+Supported providers are `ee`, `planetary_computer`, `cdse`, and `eopf`. Supported processing and product levels are `primary`, `boa`, `toa`, `raw`, `lst`, `wst`, `grd`, `rtc`, and `slc`. Available entries contain `stac_endpoint`, `collection`, and `docs`; unavailable combinations return `None`.
 
 ## Next steps
 

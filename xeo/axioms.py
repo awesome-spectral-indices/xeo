@@ -3,6 +3,7 @@ from __future__ import annotations
 from copy import deepcopy
 from datetime import date
 from typing import TYPE_CHECKING, Any
+from urllib.parse import unquote, urlparse
 
 from box import Box
 
@@ -114,6 +115,7 @@ class Catalogue(object):
             "platform_type",
             "platform",
             "operator",
+            "contributors",
             "start_date",
             "status",
             "availability",
@@ -302,6 +304,12 @@ class Instrument(object):
         return self._data["operator"]
 
     @property
+    def contributors(self) -> list[str]:
+        """GitHub profile URLs for contributors to the instrument record."""
+
+        return self._data["contributors"]
+
+    @property
     def start_date(self) -> str:
         """Start of instrument operation."""
 
@@ -380,7 +388,8 @@ class Instrument(object):
             Data provider. One of ``ee``, ``planetary_computer``, ``cdse``, or
             ``eopf``.
         processing_level : str, default="primary"
-            Processing level. One of ``primary``, ``boa``, ``toa``, or ``raw``.
+            Processing or product level. One of ``primary``, ``boa``, ``toa``,
+            ``raw``, ``lst``, ``wst``, ``grd``, ``rtc``, or ``slc``.
 
         Returns
         -------
@@ -407,7 +416,17 @@ class Instrument(object):
             "cdse": "cdse",
             "eopf": "eopf",
         }
-        processing_levels = ("primary", "boa", "toa", "raw")
+        processing_levels = (
+            "primary",
+            "boa",
+            "toa",
+            "raw",
+            "lst",
+            "wst",
+            "grd",
+            "rtc",
+            "slc",
+        )
 
         if provider not in providers:
             choices = ", ".join(providers)
@@ -450,6 +469,8 @@ class Instrument(object):
         srf = self.extensions.get("spectral", {}).get(
             "spectral_response_function"
         )
+        if isinstance(srf, str):
+            return bool(srf.strip())
         return isinstance(srf, dict) and bool(srf)
 
     def bands(self) -> pd.DataFrame | None:
@@ -469,22 +490,46 @@ class Instrument(object):
         frame.index.name = "band"
         return frame
 
-    def srf(self) -> pd.DataFrame | None:
+    def srf(self, *, refresh: bool = False) -> pd.DataFrame | None:
         """Return the spectral response function as a DataFrame, when available. 🐱
 
         ``None`` is returned when the instrument has no spectral response
-        function in the catalogue.
+        function in the catalogue. URL-based SRFs are downloaded on first use
+        and stored in a per-user cache. Later calls reuse the cached CSV.
+
+        Parameters
+        ----------
+        refresh : bool, default=False
+            Download the SRF again even when a cached copy is available.
         """
 
-        srf = self.extensions.get("spectral", {}).get(
-            "spectral_response_function"
-        )
-        if not isinstance(srf, dict) or not srf:
+        spectral = self.extensions.get("spectral", {})
+        srf = spectral.get("spectral_response_function")
+        if not isinstance(srf, (dict, str)) or not srf:
             return None
 
         import pandas as pd
 
-        return pd.DataFrame.from_dict(srf, orient="columns")
+        if isinstance(srf, dict):
+            return pd.DataFrame.from_dict(srf, orient="columns")
+
+        filename = spectral.get("spectral_response_function_file")
+        if not isinstance(filename, str) or not filename:
+            filename = unquote(urlparse(srf).path.rsplit("/", 1)[-1])
+
+        bands = spectral.get("bands")
+        expected_bands = list(bands) if isinstance(bands, dict) else None
+
+        from ._srf import load_srf
+
+        return load_srf(
+            url=srf,
+            filename=filename,
+            catalogue_version=catalogue.version,
+            instrument_id=self.id,
+            expected_bands=expected_bands,
+            refresh=refresh,
+        )
 
     def __repr__(self) -> str:
         """Return the instrument identifier and name."""

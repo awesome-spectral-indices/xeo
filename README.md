@@ -60,9 +60,6 @@ The catalogue is the source of the instrument records; `xeo` is the Python inter
 
 # Installation
 
-> [!NOTE]
-> The conda-forge package has not been published yet. The commands below will become available with the first release on each channel.
-
 Install `xeo` from PyPI:
 
 ```bash
@@ -115,6 +112,7 @@ assert msi is xeo.instruments["MSI_S2A"]
 print(msi.name)
 print(msi.platform)
 print(msi.operator)
+print(msi.contributors)
 print(msi.status)
 ```
 
@@ -165,7 +163,7 @@ if msi.has_bands:
     print(bands.loc[["B2", "B3", "B4"], ["center_wavelength", "bandwidth"]])
 ```
 
-Wavelengths and bandwidths are expressed in nanometres, and band-level ground sampling distances are expressed in metres.
+Wavelengths and bandwidths are expressed in nanometres, and band-level ground sampling distances are expressed in metres. Thermal bands may also include noise-equivalent temperature difference values in the `ne_delta_t` column.
 
 ## Load spectral response functions
 
@@ -177,7 +175,9 @@ if msi.has_srf:
     print(srf[["wavelength", "B2", "B3", "B4"]].head())
 ```
 
-Both `bands()` and `srf()` return `None` when the requested data is not available.
+SRFs are external CSV resources. The first `srf()` call downloads the file into a per-user cache organized by catalogue version; subsequent calls reuse that local file and work offline. Use `msi.srf(refresh=True)` to replace the cached file with the current resource. Set the `XEO_CACHE_DIR` environment variable when the cache should live in a custom writable location.
+
+Both `bands()` and `srf()` return `None` when the requested data is not available. Checking `has_srf` reads catalogue metadata only and never downloads anything.
 
 ## Plot bands and spectral response functions
 
@@ -216,7 +216,7 @@ planetary_computer = msi.get_data_access("planetary_computer", "boa")
 cdse = msi.get_data_access("cdse", "toa")
 ```
 
-Available providers are `ee`, `planetary_computer`, `cdse`, and `eopf`; processing levels are `primary`, `boa`, `toa`, and `raw`. An available entry is returned as a dictionary with `stac_endpoint`, `collection`, and `docs`. Valid combinations that are not available for an instrument return `None`.
+Available providers are `ee`, `planetary_computer`, `cdse`, and `eopf`; supported processing and product levels are `primary`, `boa`, `toa`, `raw`, `lst`, `wst`, `grd`, `rtc`, and `slc`. An available entry is returned as a dictionary with `stac_endpoint`, `collection`, and `docs`. Valid combinations that are not available for an instrument return `None`.
 
 ## Work with raw catalogue data
 

@@ -26,6 +26,7 @@ metadata = {
     "platform_type": instrument.platform_type,
     "platform": instrument.platform,
     "operator": instrument.operator,
+    "contributors": instrument.contributors,
     "start_date": instrument.start_date,
     "end_date": instrument.end_date,
     "status": instrument.status,

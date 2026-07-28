@@ -47,7 +47,7 @@ primary_collection_ids
 
 ## Select a provider and processing level
 
-The supported processing levels are `primary`, `boa`, `toa`, and `raw`. A valid combination that is unavailable for the instrument returns `None`.
+The supported processing and product levels are `primary`, `boa`, `toa`, `raw`, `lst`, `wst`, `grd`, `rtc`, and `slc`. A valid combination that is unavailable for the instrument returns `None`.
 
 
 ```python
@@ -55,6 +55,18 @@ print(instrument.get_data_access())
 print(instrument.get_data_access("planetary_computer", "boa"))
 print(instrument.get_data_access("cdse", "toa"))
 print(instrument.get_data_access(processing_level="raw"))
+```
+
+## Access product-specific collections
+
+Some instruments expose collections for specialized products. Sentinel-3A SLSTR, for example, provides land surface temperature (`lst`) and water surface temperature (`wst`) access points.
+
+
+```python
+slstr = xeo.instruments.SLSTR_S3A
+
+print(slstr.get_data_access("planetary_computer", "lst"))
+print(slstr.get_data_access("cdse", "wst"))
 ```
 
 ## List every available access point

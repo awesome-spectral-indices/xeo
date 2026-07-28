@@ -25,7 +25,7 @@ print(json.dumps({"id": raw_record["id"], "name": raw_record["name"]}, indent=2)
 
 ## Build a catalogue summary DataFrame
 
-A compact DataFrame is useful for filtering, sorting, and counting instruments without flattening the larger extension and SRF data.
+A compact DataFrame is useful for filtering, sorting, and counting instruments without flattening the larger extension data. SRF fields in the raw catalogue are URLs; use `Instrument.srf()` when the response samples are needed.
 
 
 ```python

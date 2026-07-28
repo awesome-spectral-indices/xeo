@@ -178,6 +178,7 @@ Instrument(MSI_S2A: MultiSpectral Instrument)
 
 - [**acronym**](#xeo.Instrument.acronym) (<code>[str](#str)</code>) – Instrument acronym.
 - [**availability**](#xeo.Instrument.availability) (<code>[str](#str)</code>) – Instrument data accessibility level.
+- [**contributors**](#xeo.Instrument.contributors) (<code>[list](#list)[[str](#str)]</code>) – GitHub profile URLs for contributors to the instrument record.
 - [**data**](#xeo.Instrument.data) (<code>[dict](#dict)[[str](#str), [Any](#typing.Any)]</code>) – Complete instrument record from the catalogue.
 - [**data_links**](#xeo.Instrument.data_links) (<code>[list](#list)[[str](#str)]</code>) – URLs where instrument data products can be accessed.
 - [**end_date**](#xeo.Instrument.end_date) (<code>[str](#str) | None</code>) – End of instrument operation, when available.
@@ -221,6 +222,13 @@ Return spectral bands as a DataFrame, when available.
 
 The DataFrame is indexed by band identifier. ``None`` is returned when
 the instrument has no materialized spectral band definitions.
+
+#### `contributors` {#xeo.Instrument.contributors}
+```python
+contributors: list[str]
+```
+
+GitHub profile URLs for contributors to the instrument record.
 
 #### `data` {#xeo.Instrument.data}
 ```python
@@ -275,7 +283,8 @@ Return metadata for an available data access point.
 
 - **provider** (<code>[str](#str)</code>) – Data provider. One of ``ee``, ``planetary_computer``, ``cdse``, or
 ``eopf``.
-- **processing_level** (<code>[str](#str)</code>) – Processing level. One of ``primary``, ``boa``, ``toa``, or ``raw``.
+- **processing_level** (<code>[str](#str)</code>) – Processing or product level. One of ``primary``, ``boa``, ``toa``,
+``raw``, ``lst``, ``wst``, ``grd``, ``rtc``, or ``slc``.
 
 **Returns:**
 
@@ -369,13 +378,18 @@ Reference URLs for the instrument.
 
 #### `srf` {#xeo.Instrument.srf}
 ```python
-srf()
+srf(*, refresh=False)
 ```
 
 Return the spectral response function as a DataFrame, when available. 🐱
 
 ``None`` is returned when the instrument has no spectral response
-function in the catalogue.
+function in the catalogue. URL-based SRFs are downloaded on first use
+and stored in a per-user cache. Later calls reuse the cached CSV.
+
+**Parameters:**
+
+- **refresh** (<code>[bool](#bool)</code>) – Download the SRF again even when a cached copy is available.
 
 #### `start_date` {#xeo.Instrument.start_date}
 ```python

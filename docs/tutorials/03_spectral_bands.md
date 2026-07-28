@@ -2,7 +2,7 @@
 
 # 03 — Working with spectral bands
 
-When band definitions are available, `Instrument.bands()` returns them as a pandas DataFrame indexed by band identifier. Wavelengths and bandwidths are expressed in nanometres; band-level GSD values are expressed in metres.
+When band definitions are available, `Instrument.bands()` returns them as a pandas DataFrame indexed by band identifier. Wavelengths and bandwidths are expressed in nanometres; band-level GSD values are expressed in metres. Thermal bands may also provide noise-equivalent temperature difference values in the `ne_delta_t` column.
 
 
 ```python
