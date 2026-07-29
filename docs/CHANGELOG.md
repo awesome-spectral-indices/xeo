@@ -2,7 +2,7 @@
 
 All notable changes to `xeo` are documented in this file.
 
-## 0.3.0 (Upcoming)
+## 0.3.0
 
 ### Added
 
