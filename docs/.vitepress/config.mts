@@ -13,8 +13,14 @@ export default defineConfig({
       { text: 'API Reference', link: '/api' },
       { text: 'Tutorials', link: '/tutorials/' },
       { text: 'Contributing', link: '/contributing' },
-      { text: 'Changelog', link: '/CHANGELOG' },
-      { text: 'How to Cite', link: '/publications' },
+      {
+        text: 'More',
+        items: [
+          { text: 'Changelog', link: '/CHANGELOG' },
+          { text: 'How to Cite', link: '/publications' },
+          { text: 'Funding', link: '/funding' },
+        ],
+      },
       { text: 'Instrument Catalogue', link: 'https://awesome-spectral-indices.github.io/awesome-earth-observation-instruments/' },
     ],
 

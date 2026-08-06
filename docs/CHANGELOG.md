@@ -2,6 +2,13 @@
 
 All notable changes to `xeo` are documented in this file.
 
+## 0.4.0 (Upcoming)
+
+### Documentation
+
+- Added project funding acknowledgments and funder logos to the README and documentation website.
+- Added a `More` navigation menu containing the changelog, citation guidance, and funding page.
+
 ## 0.3.0
 
 ### Added
