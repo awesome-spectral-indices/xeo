@@ -5456,6 +5456,86 @@
                 "OLCI_S3B"
             ]
         },
+        "SPACEVIEW110_WV4": {
+            "id": "SPACEVIEW110_WV4",
+            "name": "SpaceView-110 Imaging System",
+            "acronym": "SpaceView-110",
+            "type": "multispectral",
+            "platform_type": "satellite",
+            "platform": [
+                "WorldView-4"
+            ],
+            "operator": [
+                "Maxar"
+            ],
+            "start_date": "2016-11-11",
+            "end_date": "2019-01-07",
+            "status": "retired",
+            "availability": "private",
+            "contributors": [
+                "https://github.com/davemlz"
+            ],
+            "references": [
+                "https://vantor.com/resources/worldview-4-datasheet/",
+                "https://space.oscar.wmo.int/instruments/view/spaceview_110",
+                "https://space.oscar.wmo.int/satellites/view/worldview_4",
+                "https://database.eohandbook.com/database/instrumentsummary.aspx?instrumentID=1976"
+            ],
+            "notes": "WorldView-4 was lost after a control moment gyroscope failure on 2019-01-07. Nominal band intervals and nadir ground sample distances follow the current Vantor WorldView-4 datasheet. Band identifiers use the channel names published in the datasheet, with separators normalized to underscores. Published Vantor specifications do not provide a tabular spectral response function.",
+            "data_links": [
+                "https://vantor.com/product/worldview/2d/",
+                "https://discover.vantor.com/"
+            ],
+            "extensions": {
+                "spectral": {
+                    "bands": {
+                        "PAN": {
+                            "center_wavelength": 625.0,
+                            "bandwidth": 350,
+                            "band_description": "Panchromatic",
+                            "common_name": "pan",
+                            "gsd": 0.31
+                        },
+                        "BLUE": {
+                            "center_wavelength": 480.0,
+                            "bandwidth": 60,
+                            "band_description": "Blue",
+                            "common_name": "blue",
+                            "gsd": 1.24
+                        },
+                        "GREEN": {
+                            "center_wavelength": 545.0,
+                            "bandwidth": 70,
+                            "band_description": "Green",
+                            "common_name": "green",
+                            "gsd": 1.24
+                        },
+                        "RED": {
+                            "center_wavelength": 672.5,
+                            "bandwidth": 35,
+                            "band_description": "Red",
+                            "common_name": "red",
+                            "gsd": 1.24
+                        },
+                        "NIR": {
+                            "center_wavelength": 850.0,
+                            "bandwidth": 140,
+                            "band_description": "Near infrared",
+                            "common_name": "nir08",
+                            "gsd": 1.24
+                        }
+                    }
+                },
+                "imaging": {
+                    "swath_width": 13.2
+                },
+                "cross_links": {
+                    "ceos": "https://database.eohandbook.com/database/instrumentsummary.aspx?instrumentID=1976"
+                }
+            },
+            "family": [],
+            "platform_companions": []
+        },
         "TIRS2_L9": {
             "id": "TIRS2_L9",
             "name": "Thermal Infrared Sensor 2",
@@ -5918,6 +5998,1101 @@
             "platform_companions": [
                 "MSS_L5"
             ]
+        },
+        "WV110_WV2": {
+            "id": "WV110_WV2",
+            "name": "WorldView-110 Camera",
+            "acronym": "WV110",
+            "type": "multispectral",
+            "platform_type": "satellite",
+            "platform": [
+                "WorldView-2"
+            ],
+            "operator": [
+                "Vantor"
+            ],
+            "start_date": "2009-10-08",
+            "status": "operational",
+            "availability": "private",
+            "contributors": [
+                "https://github.com/davemlz"
+            ],
+            "references": [
+                "https://vantor.com/resources/worldview-2-datasheet/",
+                "https://space.oscar.wmo.int/instruments/view/wv110",
+                "https://space.oscar.wmo.int/satellites/view/worldview_2",
+                "https://vantor.com/company/constellation/",
+                "https://www.indexdatabase.de/db/s-single.php?id=40"
+            ],
+            "notes": "Nominal band intervals and nadir ground sample distances follow the current Vantor WorldView-2 datasheet. Band identifiers use the channel names published in the datasheet, with separators normalized to underscores. Published Vantor specifications do not provide a tabular spectral response function.",
+            "data_links": [
+                "https://vantor.com/product/worldview/2d/",
+                "https://discover.vantor.com/"
+            ],
+            "extensions": {
+                "spectral": {
+                    "bands": {
+                        "PAN": {
+                            "center_wavelength": 625.0,
+                            "bandwidth": 350,
+                            "band_description": "Panchromatic",
+                            "common_name": "pan",
+                            "gsd": 0.46
+                        },
+                        "COASTAL": {
+                            "center_wavelength": 425.0,
+                            "bandwidth": 50,
+                            "band_description": "Coastal",
+                            "common_name": "coastal",
+                            "gsd": 1.85
+                        },
+                        "BLUE": {
+                            "center_wavelength": 480.0,
+                            "bandwidth": 60,
+                            "band_description": "Blue",
+                            "common_name": "blue",
+                            "gsd": 1.85
+                        },
+                        "GREEN": {
+                            "center_wavelength": 545.0,
+                            "bandwidth": 70,
+                            "band_description": "Green",
+                            "common_name": "green",
+                            "gsd": 1.85
+                        },
+                        "YELLOW": {
+                            "center_wavelength": 605.0,
+                            "bandwidth": 40,
+                            "band_description": "Yellow",
+                            "common_name": "yellow",
+                            "gsd": 1.85
+                        },
+                        "RED": {
+                            "center_wavelength": 660.0,
+                            "bandwidth": 60,
+                            "band_description": "Red",
+                            "common_name": "red",
+                            "gsd": 1.85
+                        },
+                        "RED_EDGE": {
+                            "center_wavelength": 725.0,
+                            "bandwidth": 40,
+                            "band_description": "Red edge",
+                            "common_name": "rededge",
+                            "gsd": 1.85
+                        },
+                        "NIR_1": {
+                            "center_wavelength": 832.5,
+                            "bandwidth": 125,
+                            "band_description": "Near infrared 1",
+                            "common_name": "nir08",
+                            "gsd": 1.85
+                        },
+                        "NIR_2": {
+                            "center_wavelength": 950.0,
+                            "bandwidth": 180,
+                            "band_description": "Near infrared 2",
+                            "common_name": "nir09",
+                            "gsd": 1.85
+                        }
+                    }
+                },
+                "imaging": {
+                    "swath_width": 16.4
+                },
+                "cross_links": {
+                    "idb": "https://www.indexdatabase.de/db/s-single.php?id=40",
+                    "ceos": "https://database.eohandbook.com/database/instrumentsummary.aspx?instrumentID=1766"
+                }
+            },
+            "family": [
+                "WV110_WV3"
+            ],
+            "platform_companions": []
+        },
+        "WV110_WV3": {
+            "id": "WV110_WV3",
+            "name": "WorldView-110 Camera",
+            "acronym": "WV110",
+            "type": "multispectral",
+            "platform_type": "satellite",
+            "platform": [
+                "WorldView-3"
+            ],
+            "operator": [
+                "Vantor"
+            ],
+            "start_date": "2014-08-13",
+            "status": "operational",
+            "availability": "private",
+            "contributors": [
+                "https://github.com/davemlz"
+            ],
+            "references": [
+                "https://vantor.com/resources/worldview-3-datasheet/",
+                "https://space.oscar.wmo.int/instruments/view/wv110",
+                "https://space.oscar.wmo.int/satellites/view/worldview_3",
+                "https://www.usgs.gov/centers/eros/science/usgs-eros-archive-commercial-satellites-cdp-imagery-worldview-3",
+                "https://database.eohandbook.com/database/instrumentsummary.aspx?instrumentID=1977",
+                "https://www.indexdatabase.de/db/s-single.php?id=46",
+                "https://vantor.com/company/constellation/"
+            ],
+            "notes": "This record combines the VNIR, SWIR, and CAVIS channels catalogued for WorldView-3. Band identifiers use the channel names published in the Vantor datasheet, with separators normalized to underscores. The two CAVIS Aerosol-3 channels share a nominal spectral interval and are distinguished by the datasheet's standard and P labels. The datasheet does not provide tabular spectral response samples.",
+            "data_links": [
+                "https://vantor.com/product/worldview/2d/",
+                "https://discover.vantor.com/"
+            ],
+            "extensions": {
+                "spectral": {
+                    "bands": {
+                        "PAN": {
+                            "center_wavelength": 625.0,
+                            "bandwidth": 350,
+                            "band_description": "Panchromatic",
+                            "common_name": "pan",
+                            "gsd": 0.31
+                        },
+                        "COASTAL": {
+                            "center_wavelength": 425.5,
+                            "bandwidth": 57,
+                            "band_description": "Coastal",
+                            "common_name": "coastal",
+                            "gsd": 1.24
+                        },
+                        "BLUE": {
+                            "center_wavelength": 481.0,
+                            "bandwidth": 72,
+                            "band_description": "Blue",
+                            "common_name": "blue",
+                            "gsd": 1.24
+                        },
+                        "GREEN": {
+                            "center_wavelength": 546.5,
+                            "bandwidth": 79,
+                            "band_description": "Green",
+                            "common_name": "green",
+                            "gsd": 1.24
+                        },
+                        "YELLOW": {
+                            "center_wavelength": 604.5,
+                            "bandwidth": 49,
+                            "band_description": "Yellow",
+                            "common_name": "yellow",
+                            "gsd": 1.24
+                        },
+                        "RED": {
+                            "center_wavelength": 661.0,
+                            "bandwidth": 70,
+                            "band_description": "Red",
+                            "common_name": "red",
+                            "gsd": 1.24
+                        },
+                        "RED_EDGE": {
+                            "center_wavelength": 723.5,
+                            "bandwidth": 51,
+                            "band_description": "Red edge",
+                            "common_name": "rededge",
+                            "gsd": 1.24
+                        },
+                        "NIR_1": {
+                            "center_wavelength": 832.0,
+                            "bandwidth": 134,
+                            "band_description": "Near infrared 1",
+                            "common_name": "nir08",
+                            "gsd": 1.24
+                        },
+                        "NIR_2": {
+                            "center_wavelength": 948.0,
+                            "bandwidth": 182,
+                            "band_description": "Near infrared 2",
+                            "common_name": "nir09",
+                            "gsd": 1.24
+                        },
+                        "SWIR_1": {
+                            "center_wavelength": 1209.5,
+                            "bandwidth": 51,
+                            "band_description": "Short-wave infrared 1",
+                            "gsd": 3.7
+                        },
+                        "SWIR_2": {
+                            "center_wavelength": 1572.0,
+                            "bandwidth": 52,
+                            "band_description": "Short-wave infrared 2",
+                            "common_name": "swir16",
+                            "gsd": 3.7
+                        },
+                        "SWIR_3": {
+                            "center_wavelength": 1661.0,
+                            "bandwidth": 50,
+                            "band_description": "Short-wave infrared 3",
+                            "gsd": 3.7
+                        },
+                        "SWIR_4": {
+                            "center_wavelength": 1730.5,
+                            "bandwidth": 57,
+                            "band_description": "Short-wave infrared 4",
+                            "gsd": 3.7
+                        },
+                        "SWIR_5": {
+                            "center_wavelength": 2164.0,
+                            "bandwidth": 54,
+                            "band_description": "Short-wave infrared 5",
+                            "gsd": 3.7
+                        },
+                        "SWIR_6": {
+                            "center_wavelength": 2203.0,
+                            "bandwidth": 58,
+                            "band_description": "Short-wave infrared 6",
+                            "common_name": "swir22",
+                            "gsd": 3.7
+                        },
+                        "SWIR_7": {
+                            "center_wavelength": 2260.0,
+                            "bandwidth": 64,
+                            "band_description": "Short-wave infrared 7",
+                            "gsd": 3.7
+                        },
+                        "SWIR_8": {
+                            "center_wavelength": 2329.0,
+                            "bandwidth": 88,
+                            "band_description": "Short-wave infrared 8",
+                            "gsd": 3.7
+                        },
+                        "CAVIS_DESERT_CLOUDS": {
+                            "center_wavelength": 412.5,
+                            "bandwidth": 15,
+                            "band_description": "CAVIS desert clouds",
+                            "gsd": 30.0
+                        },
+                        "CAVIS_AEROSOL_1": {
+                            "center_wavelength": 484.0,
+                            "bandwidth": 50,
+                            "band_description": "CAVIS aerosol 1",
+                            "gsd": 30.0
+                        },
+                        "CAVIS_GREEN": {
+                            "center_wavelength": 555.0,
+                            "bandwidth": 60,
+                            "band_description": "CAVIS green",
+                            "gsd": 30.0
+                        },
+                        "CAVIS_AEROSOL_2": {
+                            "center_wavelength": 660.0,
+                            "bandwidth": 50,
+                            "band_description": "CAVIS aerosol 2",
+                            "gsd": 30.0
+                        },
+                        "CAVIS_WATER_1": {
+                            "center_wavelength": 865.0,
+                            "bandwidth": 40,
+                            "band_description": "CAVIS water 1",
+                            "gsd": 30.0
+                        },
+                        "CAVIS_WATER_2": {
+                            "center_wavelength": 912.0,
+                            "bandwidth": 30,
+                            "band_description": "CAVIS water 2",
+                            "gsd": 30.0
+                        },
+                        "CAVIS_WATER_3": {
+                            "center_wavelength": 947.5,
+                            "bandwidth": 35,
+                            "band_description": "CAVIS water 3",
+                            "gsd": 30.0
+                        },
+                        "CAVIS_NDVI_SWIR": {
+                            "center_wavelength": 1236.0,
+                            "bandwidth": 32,
+                            "band_description": "CAVIS NDVI-SWIR",
+                            "gsd": 30.0
+                        },
+                        "CAVIS_CIRRUS": {
+                            "center_wavelength": 1385.0,
+                            "bandwidth": 40,
+                            "band_description": "CAVIS cirrus",
+                            "common_name": "cirrus",
+                            "gsd": 30.0
+                        },
+                        "CAVIS_SNOW": {
+                            "center_wavelength": 1650.0,
+                            "bandwidth": 60,
+                            "band_description": "CAVIS snow",
+                            "gsd": 30.0
+                        },
+                        "CAVIS_AEROSOL_3": {
+                            "center_wavelength": 2175.0,
+                            "bandwidth": 140,
+                            "band_description": "CAVIS aerosol 3",
+                            "gsd": 30.0
+                        },
+                        "CAVIS_AEROSOL_3_P": {
+                            "center_wavelength": 2175.0,
+                            "bandwidth": 140,
+                            "band_description": "CAVIS aerosol 3 P",
+                            "gsd": 30.0
+                        }
+                    }
+                },
+                "imaging": {
+                    "swath_width": 13.1
+                },
+                "cross_links": {
+                    "idb": "https://www.indexdatabase.de/db/s-single.php?id=46",
+                    "ceos": "https://database.eohandbook.com/database/instrumentsummary.aspx?instrumentID=1977"
+                }
+            },
+            "family": [
+                "WV110_WV2"
+            ],
+            "platform_companions": []
+        },
+        "WV60_WV1": {
+            "id": "WV60_WV1",
+            "name": "WorldView-60 Camera",
+            "acronym": "WV60",
+            "type": "other",
+            "platform_type": "satellite",
+            "platform": [
+                "WorldView-1"
+            ],
+            "operator": [
+                "Vantor"
+            ],
+            "start_date": "2007-09-18",
+            "status": "operational",
+            "availability": "private",
+            "contributors": [
+                "https://github.com/davemlz"
+            ],
+            "references": [
+                "https://vantor.com/resources/worldview-1-datasheet/",
+                "https://space.oscar.wmo.int/instruments/view/wv60",
+                "https://space.oscar.wmo.int/satellites/view/worldview_1",
+                "https://database.eohandbook.com/database/instrumentsummary.aspx?instrumentID=1969",
+                "https://vantor.com/company/constellation/"
+            ],
+            "notes": "WV60 is a panchromatic-only pushbroom camera. Its nominal band interval, nadir ground sample distance, and swath width follow the current Vantor WorldView-1 datasheet. The datasheet does not provide a tabular spectral response function.",
+            "data_links": [
+                "https://vantor.com/product/worldview/2d/",
+                "https://discover.vantor.com/"
+            ],
+            "extensions": {
+                "spectral": {
+                    "bands": {
+                        "PAN": {
+                            "center_wavelength": 650,
+                            "bandwidth": 500,
+                            "band_description": "Panchromatic",
+                            "common_name": "pan",
+                            "gsd": 0.5
+                        }
+                    }
+                },
+                "imaging": {
+                    "swath_width": 17.7
+                },
+                "cross_links": {
+                    "ceos": "https://database.eohandbook.com/database/instrumentsummary.aspx?instrumentID=1969"
+                }
+            },
+            "family": [],
+            "platform_companions": []
+        },
+        "WVL1": {
+            "id": "WVL1",
+            "name": "WorldView-Legion Camera",
+            "acronym": "WVL",
+            "type": "multispectral",
+            "platform_type": "satellite",
+            "platform": [
+                "WorldView Legion-1"
+            ],
+            "operator": [
+                "Vantor"
+            ],
+            "start_date": "2024-05-02",
+            "status": "operational",
+            "availability": "private",
+            "contributors": [
+                "https://github.com/davemlz"
+            ],
+            "references": [
+                "https://vantor.com/resources/worldview-legion-datasheet/",
+                "https://space.oscar.wmo.int/instruments/view/spaceview_ng",
+                "https://space.oscar.wmo.int/satellites/view/worldview_legion_1",
+                "https://database.eohandbook.com/database/instrumentsummary.aspx?instrumentID=1984",
+                "https://vantor.com/blog/worldview-legion-the-new-telescope-packs-more-punch/",
+                "https://vantor.com/blog/first-two-worldview-legion-spacecraft-performing-well-after-launch/",
+                "https://vantor.com/blog/next-generation-tasking-guaranteed-collection-unmatched-satellite-imaging-capacity/"
+            ],
+            "notes": "The nominal band intervals and nadir ground sample distances follow the current Vantor WorldView Legion datasheet at 518 km altitude, which supersedes prelaunch values quoted for a 450 km orbit. Band identifiers use the channel names published in the datasheet, with separators normalized to underscores. No authoritative tabular spectral response samples were found.",
+            "data_links": [
+                "https://vantor.com/product/worldview/2d/",
+                "https://discover.vantor.com/"
+            ],
+            "extensions": {
+                "spectral": {
+                    "bands": {
+                        "PAN": {
+                            "center_wavelength": 625.0,
+                            "bandwidth": 350,
+                            "band_description": "Panchromatic",
+                            "common_name": "pan",
+                            "gsd": 0.34
+                        },
+                        "COASTAL_BLUE": {
+                            "center_wavelength": 425.0,
+                            "bandwidth": 50,
+                            "band_description": "Coastal blue",
+                            "common_name": "coastal",
+                            "gsd": 1.36
+                        },
+                        "BLUE": {
+                            "center_wavelength": 480.0,
+                            "bandwidth": 60,
+                            "band_description": "Blue",
+                            "common_name": "blue",
+                            "gsd": 1.36
+                        },
+                        "GREEN": {
+                            "center_wavelength": 545.0,
+                            "bandwidth": 70,
+                            "band_description": "Green",
+                            "common_name": "green",
+                            "gsd": 1.36
+                        },
+                        "YELLOW": {
+                            "center_wavelength": 605.0,
+                            "bandwidth": 40,
+                            "band_description": "Yellow",
+                            "common_name": "yellow",
+                            "gsd": 1.36
+                        },
+                        "RED": {
+                            "center_wavelength": 660.0,
+                            "bandwidth": 60,
+                            "band_description": "Red",
+                            "common_name": "red",
+                            "gsd": 1.36
+                        },
+                        "RED_EDGE_1": {
+                            "center_wavelength": 705.0,
+                            "bandwidth": 20,
+                            "band_description": "Red edge 1",
+                            "common_name": "rededge071",
+                            "gsd": 1.36
+                        },
+                        "RED_EDGE_2": {
+                            "center_wavelength": 740.0,
+                            "bandwidth": 20,
+                            "band_description": "Red edge 2",
+                            "common_name": "rededge075",
+                            "gsd": 1.36
+                        },
+                        "NIR": {
+                            "center_wavelength": 832.5,
+                            "bandwidth": 125,
+                            "band_description": "Near infrared",
+                            "common_name": "nir08",
+                            "gsd": 1.36
+                        }
+                    }
+                },
+                "imaging": {
+                    "swath_width": 10.0
+                },
+                "cross_links": {
+                    "ceos": "https://database.eohandbook.com/database/instrumentsummary.aspx?instrumentID=1984"
+                }
+            },
+            "family": [
+                "WVL2",
+                "WVL3",
+                "WVL4",
+                "WVL5",
+                "WVL6"
+            ],
+            "platform_companions": []
+        },
+        "WVL2": {
+            "id": "WVL2",
+            "name": "WorldView-Legion Camera",
+            "acronym": "WVL",
+            "type": "multispectral",
+            "platform_type": "satellite",
+            "platform": [
+                "WorldView Legion-2"
+            ],
+            "operator": [
+                "Vantor"
+            ],
+            "start_date": "2024-05-02",
+            "status": "operational",
+            "availability": "private",
+            "contributors": [
+                "https://github.com/davemlz"
+            ],
+            "references": [
+                "https://vantor.com/resources/worldview-legion-datasheet/",
+                "https://space.oscar.wmo.int/instruments/view/spaceview_ng",
+                "https://space.oscar.wmo.int/satellites/view/worldview_legion_2",
+                "https://database.eohandbook.com/database/instrumentsummary.aspx?instrumentID=1984",
+                "https://vantor.com/blog/worldview-legion-the-new-telescope-packs-more-punch/",
+                "https://vantor.com/blog/first-two-worldview-legion-spacecraft-performing-well-after-launch/",
+                "https://vantor.com/blog/next-generation-tasking-guaranteed-collection-unmatched-satellite-imaging-capacity/"
+            ],
+            "notes": "The nominal band intervals and nadir ground sample distances follow the current Vantor WorldView Legion datasheet at 518 km altitude, which supersedes prelaunch values quoted for a 450 km orbit. Band identifiers use the channel names published in the datasheet, with separators normalized to underscores. No authoritative tabular spectral response samples were found.",
+            "data_links": [
+                "https://vantor.com/product/worldview/2d/",
+                "https://discover.vantor.com/"
+            ],
+            "extensions": {
+                "spectral": {
+                    "bands": {
+                        "PAN": {
+                            "center_wavelength": 625.0,
+                            "bandwidth": 350,
+                            "band_description": "Panchromatic",
+                            "common_name": "pan",
+                            "gsd": 0.34
+                        },
+                        "COASTAL_BLUE": {
+                            "center_wavelength": 425.0,
+                            "bandwidth": 50,
+                            "band_description": "Coastal blue",
+                            "common_name": "coastal",
+                            "gsd": 1.36
+                        },
+                        "BLUE": {
+                            "center_wavelength": 480.0,
+                            "bandwidth": 60,
+                            "band_description": "Blue",
+                            "common_name": "blue",
+                            "gsd": 1.36
+                        },
+                        "GREEN": {
+                            "center_wavelength": 545.0,
+                            "bandwidth": 70,
+                            "band_description": "Green",
+                            "common_name": "green",
+                            "gsd": 1.36
+                        },
+                        "YELLOW": {
+                            "center_wavelength": 605.0,
+                            "bandwidth": 40,
+                            "band_description": "Yellow",
+                            "common_name": "yellow",
+                            "gsd": 1.36
+                        },
+                        "RED": {
+                            "center_wavelength": 660.0,
+                            "bandwidth": 60,
+                            "band_description": "Red",
+                            "common_name": "red",
+                            "gsd": 1.36
+                        },
+                        "RED_EDGE_1": {
+                            "center_wavelength": 705.0,
+                            "bandwidth": 20,
+                            "band_description": "Red edge 1",
+                            "common_name": "rededge071",
+                            "gsd": 1.36
+                        },
+                        "RED_EDGE_2": {
+                            "center_wavelength": 740.0,
+                            "bandwidth": 20,
+                            "band_description": "Red edge 2",
+                            "common_name": "rededge075",
+                            "gsd": 1.36
+                        },
+                        "NIR": {
+                            "center_wavelength": 832.5,
+                            "bandwidth": 125,
+                            "band_description": "Near infrared",
+                            "common_name": "nir08",
+                            "gsd": 1.36
+                        }
+                    }
+                },
+                "imaging": {
+                    "swath_width": 10.0
+                },
+                "cross_links": {
+                    "ceos": "https://database.eohandbook.com/database/instrumentsummary.aspx?instrumentID=1984"
+                }
+            },
+            "family": [
+                "WVL1",
+                "WVL3",
+                "WVL4",
+                "WVL5",
+                "WVL6"
+            ],
+            "platform_companions": []
+        },
+        "WVL3": {
+            "id": "WVL3",
+            "name": "WorldView-Legion Camera",
+            "acronym": "WVL",
+            "type": "multispectral",
+            "platform_type": "satellite",
+            "platform": [
+                "WorldView Legion-3"
+            ],
+            "operator": [
+                "Vantor"
+            ],
+            "start_date": "2024-08-15",
+            "status": "operational",
+            "availability": "private",
+            "contributors": [
+                "https://github.com/davemlz"
+            ],
+            "references": [
+                "https://vantor.com/resources/worldview-legion-datasheet/",
+                "https://space.oscar.wmo.int/instruments/view/spaceview_ng",
+                "https://space.oscar.wmo.int/satellites/view/worldview_legion_3",
+                "https://database.eohandbook.com/database/instrumentsummary.aspx?instrumentID=1984",
+                "https://vantor.com/blog/worldview-legion-the-new-telescope-packs-more-punch/",
+                "https://vantor.com/blog/maxars-third-and-fourth-worldview-legion-satellites-performing-well-after-launch/",
+                "https://vantor.com/blog/next-generation-tasking-guaranteed-collection-unmatched-satellite-imaging-capacity/"
+            ],
+            "notes": "The nominal band intervals and nadir ground sample distances follow the current Vantor WorldView Legion datasheet at 518 km altitude, which supersedes prelaunch values quoted for a 450 km orbit. Band identifiers use the channel names published in the datasheet, with separators normalized to underscores. No authoritative tabular spectral response samples were found.",
+            "data_links": [
+                "https://vantor.com/product/worldview/2d/",
+                "https://discover.vantor.com/"
+            ],
+            "extensions": {
+                "spectral": {
+                    "bands": {
+                        "PAN": {
+                            "center_wavelength": 625.0,
+                            "bandwidth": 350,
+                            "band_description": "Panchromatic",
+                            "common_name": "pan",
+                            "gsd": 0.34
+                        },
+                        "COASTAL_BLUE": {
+                            "center_wavelength": 425.0,
+                            "bandwidth": 50,
+                            "band_description": "Coastal blue",
+                            "common_name": "coastal",
+                            "gsd": 1.36
+                        },
+                        "BLUE": {
+                            "center_wavelength": 480.0,
+                            "bandwidth": 60,
+                            "band_description": "Blue",
+                            "common_name": "blue",
+                            "gsd": 1.36
+                        },
+                        "GREEN": {
+                            "center_wavelength": 545.0,
+                            "bandwidth": 70,
+                            "band_description": "Green",
+                            "common_name": "green",
+                            "gsd": 1.36
+                        },
+                        "YELLOW": {
+                            "center_wavelength": 605.0,
+                            "bandwidth": 40,
+                            "band_description": "Yellow",
+                            "common_name": "yellow",
+                            "gsd": 1.36
+                        },
+                        "RED": {
+                            "center_wavelength": 660.0,
+                            "bandwidth": 60,
+                            "band_description": "Red",
+                            "common_name": "red",
+                            "gsd": 1.36
+                        },
+                        "RED_EDGE_1": {
+                            "center_wavelength": 705.0,
+                            "bandwidth": 20,
+                            "band_description": "Red edge 1",
+                            "common_name": "rededge071",
+                            "gsd": 1.36
+                        },
+                        "RED_EDGE_2": {
+                            "center_wavelength": 740.0,
+                            "bandwidth": 20,
+                            "band_description": "Red edge 2",
+                            "common_name": "rededge075",
+                            "gsd": 1.36
+                        },
+                        "NIR": {
+                            "center_wavelength": 832.5,
+                            "bandwidth": 125,
+                            "band_description": "Near infrared",
+                            "common_name": "nir08",
+                            "gsd": 1.36
+                        }
+                    }
+                },
+                "imaging": {
+                    "swath_width": 10.0
+                },
+                "cross_links": {
+                    "ceos": "https://database.eohandbook.com/database/instrumentsummary.aspx?instrumentID=1984"
+                }
+            },
+            "family": [
+                "WVL1",
+                "WVL2",
+                "WVL4",
+                "WVL5",
+                "WVL6"
+            ],
+            "platform_companions": []
+        },
+        "WVL4": {
+            "id": "WVL4",
+            "name": "WorldView-Legion Camera",
+            "acronym": "WVL",
+            "type": "multispectral",
+            "platform_type": "satellite",
+            "platform": [
+                "WorldView Legion-4"
+            ],
+            "operator": [
+                "Vantor"
+            ],
+            "start_date": "2024-08-15",
+            "status": "operational",
+            "availability": "private",
+            "contributors": [
+                "https://github.com/davemlz"
+            ],
+            "references": [
+                "https://vantor.com/resources/worldview-legion-datasheet/",
+                "https://space.oscar.wmo.int/instruments/view/spaceview_ng",
+                "https://space.oscar.wmo.int/satellites/view/worldview_legion_4",
+                "https://database.eohandbook.com/database/instrumentsummary.aspx?instrumentID=1984",
+                "https://vantor.com/blog/worldview-legion-the-new-telescope-packs-more-punch/",
+                "https://vantor.com/blog/maxars-third-and-fourth-worldview-legion-satellites-performing-well-after-launch/",
+                "https://vantor.com/blog/next-generation-tasking-guaranteed-collection-unmatched-satellite-imaging-capacity/"
+            ],
+            "notes": "The nominal band intervals and nadir ground sample distances follow the current Vantor WorldView Legion datasheet at 518 km altitude, which supersedes prelaunch values quoted for a 450 km orbit. Band identifiers use the channel names published in the datasheet, with separators normalized to underscores. No authoritative tabular spectral response samples were found.",
+            "data_links": [
+                "https://vantor.com/product/worldview/2d/",
+                "https://discover.vantor.com/"
+            ],
+            "extensions": {
+                "spectral": {
+                    "bands": {
+                        "PAN": {
+                            "center_wavelength": 625.0,
+                            "bandwidth": 350,
+                            "band_description": "Panchromatic",
+                            "common_name": "pan",
+                            "gsd": 0.34
+                        },
+                        "COASTAL_BLUE": {
+                            "center_wavelength": 425.0,
+                            "bandwidth": 50,
+                            "band_description": "Coastal blue",
+                            "common_name": "coastal",
+                            "gsd": 1.36
+                        },
+                        "BLUE": {
+                            "center_wavelength": 480.0,
+                            "bandwidth": 60,
+                            "band_description": "Blue",
+                            "common_name": "blue",
+                            "gsd": 1.36
+                        },
+                        "GREEN": {
+                            "center_wavelength": 545.0,
+                            "bandwidth": 70,
+                            "band_description": "Green",
+                            "common_name": "green",
+                            "gsd": 1.36
+                        },
+                        "YELLOW": {
+                            "center_wavelength": 605.0,
+                            "bandwidth": 40,
+                            "band_description": "Yellow",
+                            "common_name": "yellow",
+                            "gsd": 1.36
+                        },
+                        "RED": {
+                            "center_wavelength": 660.0,
+                            "bandwidth": 60,
+                            "band_description": "Red",
+                            "common_name": "red",
+                            "gsd": 1.36
+                        },
+                        "RED_EDGE_1": {
+                            "center_wavelength": 705.0,
+                            "bandwidth": 20,
+                            "band_description": "Red edge 1",
+                            "common_name": "rededge071",
+                            "gsd": 1.36
+                        },
+                        "RED_EDGE_2": {
+                            "center_wavelength": 740.0,
+                            "bandwidth": 20,
+                            "band_description": "Red edge 2",
+                            "common_name": "rededge075",
+                            "gsd": 1.36
+                        },
+                        "NIR": {
+                            "center_wavelength": 832.5,
+                            "bandwidth": 125,
+                            "band_description": "Near infrared",
+                            "common_name": "nir08",
+                            "gsd": 1.36
+                        }
+                    }
+                },
+                "imaging": {
+                    "swath_width": 10.0
+                },
+                "cross_links": {
+                    "ceos": "https://database.eohandbook.com/database/instrumentsummary.aspx?instrumentID=1984"
+                }
+            },
+            "family": [
+                "WVL1",
+                "WVL2",
+                "WVL3",
+                "WVL5",
+                "WVL6"
+            ],
+            "platform_companions": []
+        },
+        "WVL5": {
+            "id": "WVL5",
+            "name": "WorldView-Legion Camera",
+            "acronym": "WVL",
+            "type": "multispectral",
+            "platform_type": "satellite",
+            "platform": [
+                "WorldView Legion-5"
+            ],
+            "operator": [
+                "Vantor"
+            ],
+            "start_date": "2025-02-04",
+            "status": "operational",
+            "availability": "private",
+            "contributors": [
+                "https://github.com/davemlz"
+            ],
+            "references": [
+                "https://vantor.com/resources/worldview-legion-datasheet/",
+                "https://space.oscar.wmo.int/instruments/view/spaceview_ng",
+                "https://space.oscar.wmo.int/satellites/view/worldview_legion_5",
+                "https://database.eohandbook.com/database/instrumentsummary.aspx?instrumentID=1984",
+                "https://vantor.com/blog/worldview-legion-the-new-telescope-packs-more-punch/",
+                "https://vantor.com/blog/2025-year-in-review/",
+                "https://vantor.com/blog/next-generation-tasking-guaranteed-collection-unmatched-satellite-imaging-capacity/"
+            ],
+            "notes": "The nominal band intervals and nadir ground sample distances follow the current Vantor WorldView Legion datasheet at 518 km altitude, which supersedes prelaunch values quoted for a 450 km orbit. Band identifiers use the channel names published in the datasheet, with separators normalized to underscores. No authoritative tabular spectral response samples were found.",
+            "data_links": [
+                "https://vantor.com/product/worldview/2d/",
+                "https://discover.vantor.com/"
+            ],
+            "extensions": {
+                "spectral": {
+                    "bands": {
+                        "PAN": {
+                            "center_wavelength": 625.0,
+                            "bandwidth": 350,
+                            "band_description": "Panchromatic",
+                            "common_name": "pan",
+                            "gsd": 0.34
+                        },
+                        "COASTAL_BLUE": {
+                            "center_wavelength": 425.0,
+                            "bandwidth": 50,
+                            "band_description": "Coastal blue",
+                            "common_name": "coastal",
+                            "gsd": 1.36
+                        },
+                        "BLUE": {
+                            "center_wavelength": 480.0,
+                            "bandwidth": 60,
+                            "band_description": "Blue",
+                            "common_name": "blue",
+                            "gsd": 1.36
+                        },
+                        "GREEN": {
+                            "center_wavelength": 545.0,
+                            "bandwidth": 70,
+                            "band_description": "Green",
+                            "common_name": "green",
+                            "gsd": 1.36
+                        },
+                        "YELLOW": {
+                            "center_wavelength": 605.0,
+                            "bandwidth": 40,
+                            "band_description": "Yellow",
+                            "common_name": "yellow",
+                            "gsd": 1.36
+                        },
+                        "RED": {
+                            "center_wavelength": 660.0,
+                            "bandwidth": 60,
+                            "band_description": "Red",
+                            "common_name": "red",
+                            "gsd": 1.36
+                        },
+                        "RED_EDGE_1": {
+                            "center_wavelength": 705.0,
+                            "bandwidth": 20,
+                            "band_description": "Red edge 1",
+                            "common_name": "rededge071",
+                            "gsd": 1.36
+                        },
+                        "RED_EDGE_2": {
+                            "center_wavelength": 740.0,
+                            "bandwidth": 20,
+                            "band_description": "Red edge 2",
+                            "common_name": "rededge075",
+                            "gsd": 1.36
+                        },
+                        "NIR": {
+                            "center_wavelength": 832.5,
+                            "bandwidth": 125,
+                            "band_description": "Near infrared",
+                            "common_name": "nir08",
+                            "gsd": 1.36
+                        }
+                    }
+                },
+                "imaging": {
+                    "swath_width": 10.0
+                },
+                "cross_links": {
+                    "ceos": "https://database.eohandbook.com/database/instrumentsummary.aspx?instrumentID=1984"
+                }
+            },
+            "family": [
+                "WVL1",
+                "WVL2",
+                "WVL3",
+                "WVL4",
+                "WVL6"
+            ],
+            "platform_companions": []
+        },
+        "WVL6": {
+            "id": "WVL6",
+            "name": "WorldView-Legion Camera",
+            "acronym": "WVL",
+            "type": "multispectral",
+            "platform_type": "satellite",
+            "platform": [
+                "WorldView Legion-6"
+            ],
+            "operator": [
+                "Vantor"
+            ],
+            "start_date": "2025-02-04",
+            "status": "operational",
+            "availability": "private",
+            "contributors": [
+                "https://github.com/davemlz"
+            ],
+            "references": [
+                "https://vantor.com/resources/worldview-legion-datasheet/",
+                "https://space.oscar.wmo.int/instruments/view/spaceview_ng",
+                "https://space.oscar.wmo.int/satellites/view/worldview_legion_6",
+                "https://database.eohandbook.com/database/instrumentsummary.aspx?instrumentID=1984",
+                "https://vantor.com/blog/worldview-legion-the-new-telescope-packs-more-punch/",
+                "https://vantor.com/blog/2025-year-in-review/",
+                "https://vantor.com/blog/next-generation-tasking-guaranteed-collection-unmatched-satellite-imaging-capacity/"
+            ],
+            "notes": "The nominal band intervals and nadir ground sample distances follow the current Vantor WorldView Legion datasheet at 518 km altitude, which supersedes prelaunch values quoted for a 450 km orbit. Band identifiers use the channel names published in the datasheet, with separators normalized to underscores. No authoritative tabular spectral response samples were found.",
+            "data_links": [
+                "https://vantor.com/product/worldview/2d/",
+                "https://discover.vantor.com/"
+            ],
+            "extensions": {
+                "spectral": {
+                    "bands": {
+                        "PAN": {
+                            "center_wavelength": 625.0,
+                            "bandwidth": 350,
+                            "band_description": "Panchromatic",
+                            "common_name": "pan",
+                            "gsd": 0.34
+                        },
+                        "COASTAL_BLUE": {
+                            "center_wavelength": 425.0,
+                            "bandwidth": 50,
+                            "band_description": "Coastal blue",
+                            "common_name": "coastal",
+                            "gsd": 1.36
+                        },
+                        "BLUE": {
+                            "center_wavelength": 480.0,
+                            "bandwidth": 60,
+                            "band_description": "Blue",
+                            "common_name": "blue",
+                            "gsd": 1.36
+                        },
+                        "GREEN": {
+                            "center_wavelength": 545.0,
+                            "bandwidth": 70,
+                            "band_description": "Green",
+                            "common_name": "green",
+                            "gsd": 1.36
+                        },
+                        "YELLOW": {
+                            "center_wavelength": 605.0,
+                            "bandwidth": 40,
+                            "band_description": "Yellow",
+                            "common_name": "yellow",
+                            "gsd": 1.36
+                        },
+                        "RED": {
+                            "center_wavelength": 660.0,
+                            "bandwidth": 60,
+                            "band_description": "Red",
+                            "common_name": "red",
+                            "gsd": 1.36
+                        },
+                        "RED_EDGE_1": {
+                            "center_wavelength": 705.0,
+                            "bandwidth": 20,
+                            "band_description": "Red edge 1",
+                            "common_name": "rededge071",
+                            "gsd": 1.36
+                        },
+                        "RED_EDGE_2": {
+                            "center_wavelength": 740.0,
+                            "bandwidth": 20,
+                            "band_description": "Red edge 2",
+                            "common_name": "rededge075",
+                            "gsd": 1.36
+                        },
+                        "NIR": {
+                            "center_wavelength": 832.5,
+                            "bandwidth": 125,
+                            "band_description": "Near infrared",
+                            "common_name": "nir08",
+                            "gsd": 1.36
+                        }
+                    }
+                },
+                "imaging": {
+                    "swath_width": 10.0
+                },
+                "cross_links": {
+                    "ceos": "https://database.eohandbook.com/database/instrumentsummary.aspx?instrumentID=1984"
+                }
+            },
+            "family": [
+                "WVL1",
+                "WVL2",
+                "WVL3",
+                "WVL4",
+                "WVL5"
+            ],
+            "platform_companions": []
         }
     }
 }
