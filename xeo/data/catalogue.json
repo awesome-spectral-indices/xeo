@@ -1889,6 +1889,478 @@
             "family": [],
             "platform_companions": []
         },
+        "HRG_SPOT5": {
+            "id": "HRG_SPOT5",
+            "name": "High Resolution Geometric",
+            "acronym": "HRG",
+            "type": "multispectral",
+            "platform_type": "satellite",
+            "platform": [
+                "SPOT-5"
+            ],
+            "operator": [
+                "CNES"
+            ],
+            "start_date": "2002-05-04",
+            "end_date": "2015-03-27",
+            "status": "retired",
+            "availability": "public",
+            "contributors": [
+                "https://github.com/davemlz"
+            ],
+            "references": [
+                "https://earth.esa.int/eogateway/missions/spot-5",
+                "https://cnes.fr/en/projects/spot",
+                "https://cnes.fr/projets/spot/instruments",
+                "https://regards.cnes.fr/html/swh/Satellites_en.html",
+                "https://database.eohandbook.com/database/instrumentsummary.aspx?instrumentID=183",
+                "https://geodes.cnes.fr/projects/swh-spot5-l1a/",
+                "https://space.oscar.wmo.int/satellites/view/spot_5"
+            ],
+            "notes": "SPOT-5 carried two HRG instruments, each with a nominal 60 km swath; using both instruments together provided up to 117 km. The panchromatic detector sampled at 5 m. The 2.5 m THR super-mode was a processed product generated from two simultaneous 5 m images acquired with a half-pixel offset, not a native 2.5 m detector sampling distance.",
+            "data_links": [
+                "https://geodes.cnes.fr/projects/swh-spot5-l1a/",
+                "https://geodes-portal.cnes.fr/"
+            ],
+            "extensions": {
+                "spectral": {
+                    "bands": {
+                        "PAN": {
+                            "center_wavelength": 595,
+                            "bandwidth": 230,
+                            "band_description": "Panchromatic band",
+                            "common_name": "pan",
+                            "gsd": 5
+                        },
+                        "B1": {
+                            "center_wavelength": 545,
+                            "bandwidth": 90,
+                            "band_description": "Green band",
+                            "common_name": "green",
+                            "gsd": 10
+                        },
+                        "B2": {
+                            "center_wavelength": 645,
+                            "bandwidth": 70,
+                            "band_description": "Red band",
+                            "common_name": "red",
+                            "gsd": 10
+                        },
+                        "B3": {
+                            "center_wavelength": 835,
+                            "bandwidth": 110,
+                            "band_description": "Near-infrared band",
+                            "common_name": "nir08",
+                            "gsd": 10
+                        },
+                        "B4": {
+                            "center_wavelength": 1665,
+                            "bandwidth": 170,
+                            "band_description": "Shortwave-infrared band",
+                            "common_name": "swir16",
+                            "gsd": 20
+                        }
+                    }
+                },
+                "imaging": {
+                    "swath_width": 60
+                },
+                "cross_links": {
+                    "idb": "https://www.indexdatabase.de/db/s-single.php?id=38",
+                    "ceos": "https://database.eohandbook.com/database/instrumentsummary.aspx?instrumentID=183"
+                }
+            },
+            "family": [],
+            "platform_companions": [
+                "HRS_SPOT5",
+                "VGT2_SPOT5"
+            ]
+        },
+        "HRS_SPOT5": {
+            "id": "HRS_SPOT5",
+            "name": "High Resolution Stereoscopic",
+            "acronym": "HRS",
+            "type": "other",
+            "platform_type": "satellite",
+            "platform": [
+                "SPOT-5"
+            ],
+            "operator": [
+                "CNES"
+            ],
+            "start_date": "2002-05-04",
+            "end_date": "2015-03-27",
+            "status": "retired",
+            "availability": "public",
+            "contributors": [
+                "https://github.com/davemlz"
+            ],
+            "references": [
+                "https://earth.esa.int/eogateway/missions/spot-5",
+                "https://cnes.fr/en/projects/spot",
+                "https://cnes.fr/projets/spot/instruments",
+                "https://regards.cnes.fr/html/swh/Satellites_en.html",
+                "https://database.eohandbook.com/database/instrumentsummary.aspx?instrumentID=759",
+                "https://geodes.cnes.fr/projects/swh-spot5-l1a/",
+                "https://space.oscar.wmo.int/satellites/view/spot_5"
+            ],
+            "notes": "HRS was a panchromatic along-track stereo instrument with forward- and backward-looking telescopes for digital elevation model production. Its imagery sampled approximately 10 m across-track and 5 m along-track; the scalar band GSD records the coarser 10 m dimension. The stereo acquisition swath was 120 km.",
+            "data_links": [
+                "https://geodes.cnes.fr/projects/swh-spot5-l1a/",
+                "https://geodes-portal.cnes.fr/"
+            ],
+            "extensions": {
+                "spectral": {
+                    "bands": {
+                        "PAN": {
+                            "center_wavelength": 595,
+                            "bandwidth": 230,
+                            "band_description": "Panchromatic stereo band",
+                            "common_name": "pan",
+                            "gsd": 10
+                        }
+                    }
+                },
+                "imaging": {
+                    "swath_width": 120
+                },
+                "cross_links": {
+                    "ceos": "https://database.eohandbook.com/database/instrumentsummary.aspx?instrumentID=759"
+                }
+            },
+            "family": [],
+            "platform_companions": [
+                "HRG_SPOT5",
+                "VGT2_SPOT5"
+            ]
+        },
+        "HRVIR_SPOT4": {
+            "id": "HRVIR_SPOT4",
+            "name": "High Resolution Visible and Infrared",
+            "acronym": "HRVIR",
+            "type": "multispectral",
+            "platform_type": "satellite",
+            "platform": [
+                "SPOT-4"
+            ],
+            "operator": [
+                "CNES"
+            ],
+            "start_date": "1998-03-24",
+            "end_date": "2013-06-29",
+            "status": "retired",
+            "availability": "public",
+            "contributors": [
+                "https://github.com/davemlz"
+            ],
+            "references": [
+                "https://earth.esa.int/eogateway/missions/spot-4",
+                "https://cnes.fr/en/projects/spot",
+                "https://cnes.fr/projets/spot/instruments",
+                "https://regards.cnes.fr/html/swh/Satellites_en.html",
+                "https://www.intelligence-airbusds.com/files/pmedia/public/r1982_9_spot_resolutions_modes_spectraux_fr_sept2010.pdf",
+                "https://database.eohandbook.com/database/instrumentsummary.aspx?instrumentID=26",
+                "https://space.oscar.wmo.int/satellites/view/spot_4"
+            ],
+            "notes": "SPOT-4 carried two independently programmable HRVIR instruments. Each unit covered 60 km, while both units together covered 117 km. The 10 m monospectral mode used the red spectral interval and was alternative to the 20 m four-band multispectral mode. SPOT-4 acquired its final Take5 images on 2013-06-19 and was switched off during de-orbiting on 2013-06-29.",
+            "data_links": [
+                "https://geodes.cnes.fr/typologies/spot/",
+                "https://geodes-portal.cnes.fr/"
+            ],
+            "extensions": {
+                "spectral": {
+                    "bands": {
+                        "M": {
+                            "center_wavelength": 645,
+                            "bandwidth": 70,
+                            "band_description": "High-resolution monospectral red band",
+                            "common_name": "red",
+                            "gsd": 10
+                        },
+                        "B1": {
+                            "center_wavelength": 545,
+                            "bandwidth": 90,
+                            "band_description": "Green band",
+                            "common_name": "green",
+                            "gsd": 20
+                        },
+                        "B2": {
+                            "center_wavelength": 645,
+                            "bandwidth": 70,
+                            "band_description": "Red band",
+                            "common_name": "red",
+                            "gsd": 20
+                        },
+                        "B3": {
+                            "center_wavelength": 835,
+                            "bandwidth": 110,
+                            "band_description": "Near-infrared band",
+                            "common_name": "nir08",
+                            "gsd": 20
+                        },
+                        "B4": {
+                            "center_wavelength": 1665,
+                            "bandwidth": 170,
+                            "band_description": "Shortwave-infrared band",
+                            "common_name": "swir16",
+                            "gsd": 20
+                        }
+                    }
+                },
+                "imaging": {
+                    "swath_width": 60
+                },
+                "cross_links": {
+                    "idb": "https://www.indexdatabase.de/db/s-single.php?id=37",
+                    "ceos": "https://database.eohandbook.com/database/instrumentsummary.aspx?instrumentID=26"
+                }
+            },
+            "family": [],
+            "platform_companions": [
+                "VGT1_SPOT4"
+            ]
+        },
+        "HRV_SPOT1": {
+            "id": "HRV_SPOT1",
+            "name": "High Resolution Visible",
+            "acronym": "HRV",
+            "type": "multispectral",
+            "platform_type": "satellite",
+            "platform": [
+                "SPOT-1"
+            ],
+            "operator": [
+                "CNES"
+            ],
+            "start_date": "1986-02-22",
+            "end_date": "2003-11-17",
+            "status": "retired",
+            "availability": "public",
+            "contributors": [
+                "https://github.com/davemlz"
+            ],
+            "references": [
+                "https://earth.esa.int/eogateway/missions/spot-1",
+                "https://cnes.fr/en/projects/spot",
+                "https://cnes.fr/projets/spot/instruments",
+                "https://regards.cnes.fr/html/swh/Satellites_en.html",
+                "https://database.eohandbook.com/database/instrumentsummary.aspx?instrumentID=19",
+                "https://space.oscar.wmo.int/instruments/view/hrv",
+                "https://space.oscar.wmo.int/satellites/view/spot_1",
+                "https://www.sciencedirect.com/science/article/abs/pii/S0273117704009160"
+            ],
+            "notes": "SPOT-1 carried two independently programmable HRV instruments. Each unit imaged a 60 km swath in either 10 m panchromatic mode or 20 m multispectral mode; operating both units together provided a 117 km combined swath. The three multispectral bands were acquired simultaneously, whereas the panchromatic and multispectral modes were alternatives.",
+            "data_links": [
+                "https://geodes.cnes.fr/projects/swh-spot1-l1c/",
+                "https://geodes.cnes.fr/typologies/spot/"
+            ],
+            "extensions": {
+                "spectral": {
+                    "bands": {
+                        "PAN": {
+                            "center_wavelength": 615,
+                            "bandwidth": 230,
+                            "band_description": "Panchromatic visible band",
+                            "common_name": "pan",
+                            "gsd": 10
+                        },
+                        "B1": {
+                            "center_wavelength": 545,
+                            "bandwidth": 90,
+                            "band_description": "Green band",
+                            "common_name": "green",
+                            "gsd": 20
+                        },
+                        "B2": {
+                            "center_wavelength": 645,
+                            "bandwidth": 70,
+                            "band_description": "Red band",
+                            "common_name": "red",
+                            "gsd": 20
+                        },
+                        "B3": {
+                            "center_wavelength": 835,
+                            "bandwidth": 110,
+                            "band_description": "Near-infrared band",
+                            "common_name": "nir08",
+                            "gsd": 20
+                        }
+                    }
+                },
+                "imaging": {
+                    "swath_width": 60
+                },
+                "cross_links": {
+                    "idb": "https://www.indexdatabase.de/db/s-single.php?id=16",
+                    "ceos": "https://database.eohandbook.com/database/instrumentsummary.aspx?instrumentID=19"
+                }
+            },
+            "family": [
+                "HRV_SPOT2",
+                "HRV_SPOT3"
+            ],
+            "platform_companions": []
+        },
+        "HRV_SPOT2": {
+            "id": "HRV_SPOT2",
+            "name": "High Resolution Visible",
+            "acronym": "HRV",
+            "type": "multispectral",
+            "platform_type": "satellite",
+            "platform": [
+                "SPOT-2"
+            ],
+            "operator": [
+                "CNES"
+            ],
+            "start_date": "1990-01-22",
+            "end_date": "2009-07-29",
+            "status": "retired",
+            "availability": "public",
+            "contributors": [
+                "https://github.com/davemlz"
+            ],
+            "references": [
+                "https://earth.esa.int/eogateway/missions/spot-2",
+                "https://cnes.fr/en/projects/spot",
+                "https://cnes.fr/projets/spot/instruments",
+                "https://regards.cnes.fr/html/swh/Satellites_en.html",
+                "https://database.eohandbook.com/database/instrumentsummary.aspx?instrumentID=19",
+                "https://space.oscar.wmo.int/instruments/view/hrv",
+                "https://space.oscar.wmo.int/satellites/view/spot_2"
+            ],
+            "notes": "SPOT-2 carried two independently programmable HRV instruments. Each unit imaged a 60 km swath in either 10 m panchromatic mode or 20 m multispectral mode; operating both units together provided a 117 km combined swath. The three multispectral bands were acquired simultaneously, whereas the panchromatic and multispectral modes were alternatives.",
+            "data_links": [
+                "https://geodes.cnes.fr/typologies/spot/",
+                "https://geodes-portal.cnes.fr/"
+            ],
+            "extensions": {
+                "spectral": {
+                    "bands": {
+                        "PAN": {
+                            "center_wavelength": 615,
+                            "bandwidth": 230,
+                            "band_description": "Panchromatic visible band",
+                            "common_name": "pan",
+                            "gsd": 10
+                        },
+                        "B1": {
+                            "center_wavelength": 545,
+                            "bandwidth": 90,
+                            "band_description": "Green band",
+                            "common_name": "green",
+                            "gsd": 20
+                        },
+                        "B2": {
+                            "center_wavelength": 645,
+                            "bandwidth": 70,
+                            "band_description": "Red band",
+                            "common_name": "red",
+                            "gsd": 20
+                        },
+                        "B3": {
+                            "center_wavelength": 835,
+                            "bandwidth": 110,
+                            "band_description": "Near-infrared band",
+                            "common_name": "nir08",
+                            "gsd": 20
+                        }
+                    }
+                },
+                "imaging": {
+                    "swath_width": 60
+                },
+                "cross_links": {
+                    "idb": "https://www.indexdatabase.de/db/s-single.php?id=16",
+                    "ceos": "https://database.eohandbook.com/database/instrumentsummary.aspx?instrumentID=19"
+                }
+            },
+            "family": [
+                "HRV_SPOT1",
+                "HRV_SPOT3"
+            ],
+            "platform_companions": []
+        },
+        "HRV_SPOT3": {
+            "id": "HRV_SPOT3",
+            "name": "High Resolution Visible",
+            "acronym": "HRV",
+            "type": "multispectral",
+            "platform_type": "satellite",
+            "platform": [
+                "SPOT-3"
+            ],
+            "operator": [
+                "CNES"
+            ],
+            "start_date": "1993-09-26",
+            "end_date": "1996-11-14",
+            "status": "retired",
+            "availability": "public",
+            "contributors": [
+                "https://github.com/davemlz"
+            ],
+            "references": [
+                "https://earth.esa.int/eogateway/missions/spot-3",
+                "https://cnes.fr/en/projects/spot",
+                "https://cnes.fr/projets/spot/instruments",
+                "https://regards.cnes.fr/html/swh/Satellites_en.html",
+                "https://database.eohandbook.com/database/instrumentsummary.aspx?instrumentID=19",
+                "https://space.oscar.wmo.int/instruments/view/hrv",
+                "https://space.oscar.wmo.int/satellites/view/spot_3"
+            ],
+            "notes": "SPOT-3 carried two independently programmable HRV instruments. Each unit imaged a 60 km swath in either 10 m panchromatic mode or 20 m multispectral mode; operating both units together provided a 117 km combined swath. The three multispectral bands were acquired simultaneously, whereas the panchromatic and multispectral modes were alternatives. Operations ended after a spacecraft attitude-control failure.",
+            "data_links": [
+                "https://geodes.cnes.fr/typologies/spot/",
+                "https://geodes-portal.cnes.fr/"
+            ],
+            "extensions": {
+                "spectral": {
+                    "bands": {
+                        "PAN": {
+                            "center_wavelength": 615,
+                            "bandwidth": 230,
+                            "band_description": "Panchromatic visible band",
+                            "common_name": "pan",
+                            "gsd": 10
+                        },
+                        "B1": {
+                            "center_wavelength": 545,
+                            "bandwidth": 90,
+                            "band_description": "Green band",
+                            "common_name": "green",
+                            "gsd": 20
+                        },
+                        "B2": {
+                            "center_wavelength": 645,
+                            "bandwidth": 70,
+                            "band_description": "Red band",
+                            "common_name": "red",
+                            "gsd": 20
+                        },
+                        "B3": {
+                            "center_wavelength": 835,
+                            "bandwidth": 110,
+                            "band_description": "Near-infrared band",
+                            "common_name": "nir08",
+                            "gsd": 20
+                        }
+                    }
+                },
+                "imaging": {
+                    "swath_width": 60
+                },
+                "cross_links": {
+                    "idb": "https://www.indexdatabase.de/db/s-single.php?id=16",
+                    "ceos": "https://database.eohandbook.com/database/instrumentsummary.aspx?instrumentID=19"
+                }
+            },
+            "family": [
+                "HRV_SPOT1",
+                "HRV_SPOT2"
+            ],
+            "platform_companions": []
+        },
         "MODIS_AQUA": {
             "id": "MODIS_AQUA",
             "name": "Moderate Resolution Imaging Spectroradiometer",
@@ -3680,6 +4152,179 @@
             "platform_companions": [
                 "TM_L5"
             ]
+        },
+        "NAOMI_SPOT6": {
+            "id": "NAOMI_SPOT6",
+            "name": "New AstroSat Optical Modular Instrument",
+            "acronym": "NAOMI",
+            "type": "multispectral",
+            "platform_type": "satellite",
+            "platform": [
+                "SPOT-6"
+            ],
+            "operator": [
+                "Airbus Defence and Space"
+            ],
+            "start_date": "2012-09-09",
+            "status": "operational",
+            "availability": "private",
+            "contributors": [
+                "https://github.com/davemlz"
+            ],
+            "references": [
+                "https://earth.esa.int/eogateway/missions/spot-6",
+                "https://cnes.fr/en/projects/spot",
+                "https://space-solutions.airbus.com/imagery/our-optical-and-radar-satellite-imagery/spot/",
+                "https://www.intelligence-airbusds.com/files/pmedia/public/r2767_9_int_012_spot6-7_en_low-2.pdf",
+                "https://www.engesat.com.br/wp-content/uploads/SPOT6-7_UserGuide_201906.pdf",
+                "https://database.eohandbook.com/database/instrumentsummary.aspx?instrumentID=1765",
+                "https://space.oscar.wmo.int/satellites/view/spot_6"
+            ],
+            "notes": "The five bands are acquired simultaneously and co-registered. Published native nadir GSD is 2 m for panchromatic and 8 m for multispectral data; standard products are delivered at 1.5 m and 6 m, respectively. The band limits are the SPOT 6 measured intervals at the 1% rejection level. The user guide plots normalized spectral sensitivities but states that numeric profiles must be requested from Airbus, so no SRF CSV is included.",
+            "data_links": [
+                "https://space-solutions.airbus.com/imagery/how-to-order-imagery-and-data/",
+                "https://space-solutions.airbus.com/imagery/how-to-order-imagery-and-data/archive-preview-tool/"
+            ],
+            "extensions": {
+                "spectral": {
+                    "bands": {
+                        "PAN": {
+                            "center_wavelength": 599.5,
+                            "bandwidth": 289,
+                            "band_description": "Panchromatic band",
+                            "common_name": "pan",
+                            "gsd": 2
+                        },
+                        "B0": {
+                            "center_wavelength": 486.5,
+                            "bandwidth": 65,
+                            "band_description": "Blue band",
+                            "common_name": "blue",
+                            "gsd": 8
+                        },
+                        "B1": {
+                            "center_wavelength": 557.0,
+                            "bandwidth": 60,
+                            "band_description": "Green band",
+                            "common_name": "green",
+                            "gsd": 8
+                        },
+                        "B2": {
+                            "center_wavelength": 659.0,
+                            "bandwidth": 70,
+                            "band_description": "Red band",
+                            "common_name": "red",
+                            "gsd": 8
+                        },
+                        "B3": {
+                            "center_wavelength": 818.0,
+                            "bandwidth": 124,
+                            "band_description": "Near-infrared band",
+                            "common_name": "nir08",
+                            "gsd": 8
+                        }
+                    }
+                },
+                "imaging": {
+                    "swath_width": 60
+                },
+                "cross_links": {
+                    "idb": "https://www.indexdatabase.de/db/s-single.php?id=173",
+                    "ceos": "https://database.eohandbook.com/database/instrumentsummary.aspx?instrumentID=1765"
+                }
+            },
+            "family": [
+                "NAOMI_SPOT7"
+            ],
+            "platform_companions": []
+        },
+        "NAOMI_SPOT7": {
+            "id": "NAOMI_SPOT7",
+            "name": "New AstroSat Optical Modular Instrument",
+            "acronym": "NAOMI",
+            "type": "multispectral",
+            "platform_type": "satellite",
+            "platform": [
+                "SPOT-7 (Azersky)"
+            ],
+            "operator": [
+                "Azercosmos"
+            ],
+            "start_date": "2014-06-30",
+            "end_date": "2023-03-17",
+            "status": "retired",
+            "availability": "private",
+            "contributors": [
+                "https://github.com/davemlz"
+            ],
+            "references": [
+                "https://earth.esa.int/eogateway/missions/spot-6",
+                "https://cnes.fr/en/projects/spot",
+                "https://space-solutions.airbus.com/imagery/our-optical-and-radar-satellite-imagery/spot/",
+                "https://www.intelligence-airbusds.com/files/pmedia/public/r2767_9_int_012_spot6-7_en_low-2.pdf",
+                "https://www.engesat.com.br/wp-content/uploads/SPOT6-7_UserGuide_201906.pdf",
+                "https://azercosmos.az/az/media-center/news/azersky-peyki-missiyasini-sona-catdirmisdir",
+                "https://api.azercosmos.az/files/annual_report_2023.pdf",
+                "https://database.eohandbook.com/database/instrumentsummary.aspx?instrumentID=1765",
+                "https://www.restec.or.jp/satellite/spot-6-7"
+            ],
+            "notes": "SPOT-7 was transferred to Azercosmos in December 2014 and operated as Azersky. Communication ceased on 2023-03-17 and could not be restored. The five bands were acquired simultaneously and co-registered. Native nadir GSD was 2 m for panchromatic and 8 m for multispectral data, while standard products were delivered at 1.5 m and 6 m. No tabular authoritative SRF samples were publicly available.",
+            "data_links": [
+                "https://space-solutions.airbus.com/imagery/how-to-order-imagery-and-data/",
+                "https://space-solutions.airbus.com/imagery/how-to-order-imagery-and-data/archive-preview-tool/"
+            ],
+            "extensions": {
+                "spectral": {
+                    "bands": {
+                        "PAN": {
+                            "center_wavelength": 599.5,
+                            "bandwidth": 289,
+                            "band_description": "Panchromatic band",
+                            "common_name": "pan",
+                            "gsd": 2
+                        },
+                        "B0": {
+                            "center_wavelength": 486.5,
+                            "bandwidth": 65,
+                            "band_description": "Blue band",
+                            "common_name": "blue",
+                            "gsd": 8
+                        },
+                        "B1": {
+                            "center_wavelength": 557.0,
+                            "bandwidth": 60,
+                            "band_description": "Green band",
+                            "common_name": "green",
+                            "gsd": 8
+                        },
+                        "B2": {
+                            "center_wavelength": 659.0,
+                            "bandwidth": 70,
+                            "band_description": "Red band",
+                            "common_name": "red",
+                            "gsd": 8
+                        },
+                        "B3": {
+                            "center_wavelength": 818.0,
+                            "bandwidth": 124,
+                            "band_description": "Near-infrared band",
+                            "common_name": "nir08",
+                            "gsd": 8
+                        }
+                    }
+                },
+                "imaging": {
+                    "swath_width": 60
+                },
+                "cross_links": {
+                    "idb": "https://www.indexdatabase.de/db/s-single.php?id=174",
+                    "ceos": "https://database.eohandbook.com/database/instrumentsummary.aspx?instrumentID=1765"
+                }
+            },
+            "family": [
+                "NAOMI_SPOT6"
+            ],
+            "platform_companions": []
         },
         "OLCI_S3A": {
             "id": "OLCI_S3A",
@@ -5998,6 +6643,269 @@
             "platform_companions": [
                 "MSS_L5"
             ]
+        },
+        "VGT1_SPOT4": {
+            "id": "VGT1_SPOT4",
+            "name": "Vegetation",
+            "acronym": "VGT-1",
+            "type": "multispectral",
+            "platform_type": "satellite",
+            "platform": [
+                "SPOT-4"
+            ],
+            "operator": [
+                "CNES"
+            ],
+            "start_date": "1998-03-24",
+            "end_date": "2013-01-11",
+            "status": "retired",
+            "availability": "public",
+            "contributors": [
+                "https://github.com/davemlz"
+            ],
+            "references": [
+                "https://cnes.fr/projets/vegetation",
+                "https://cnes.fr/projets/vegetation/instruments",
+                "https://earth.esa.int/eogateway/missions/spot-4",
+                "https://database.eohandbook.com/database/instrumentsummary.aspx?instrumentID=404",
+                "https://publications.vito.be/2016-1034-spotvgt-collection-3-products-user-manual-v10.pdf",
+                "https://spot-vegetation.com/en",
+                "https://space.oscar.wmo.int/satellites/view/spot_4"
+            ],
+            "notes": "VGT-1 and VGT-2 were nearly identical four-channel instruments. Their native nadir ground sampling distance was approximately 1.15 km and increased toward the swath edge; standard synthesis products were distributed on a 1 km grid. VGT-1 provided the initial SPOT-VEGETATION time series before VGT-2 became its operational successor.",
+            "data_links": [
+                "https://dataspace.copernicus.eu/spot-vegetation",
+                "https://docs.terrascope.be/DataProducts/SPOT-VGT/ProductsOverview.html",
+                "https://spot-vegetation.com/en"
+            ],
+            "extensions": {
+                "spectral": {
+                    "bands": {
+                        "B0": {
+                            "center_wavelength": 450,
+                            "bandwidth": 40,
+                            "band_description": "Blue band for atmospheric correction",
+                            "common_name": "blue",
+                            "gsd": 1150
+                        },
+                        "B2": {
+                            "center_wavelength": 645,
+                            "bandwidth": 70,
+                            "band_description": "Red vegetation band",
+                            "common_name": "red",
+                            "gsd": 1150
+                        },
+                        "B3": {
+                            "center_wavelength": 835,
+                            "bandwidth": 110,
+                            "band_description": "Near-infrared vegetation band",
+                            "common_name": "nir08",
+                            "gsd": 1150
+                        },
+                        "MIR": {
+                            "center_wavelength": 1665,
+                            "bandwidth": 170,
+                            "band_description": "Mid-infrared vegetation and surface-moisture band",
+                            "common_name": "swir16",
+                            "gsd": 1150
+                        }
+                    }
+                },
+                "imaging": {
+                    "swath_width": 2250
+                },
+                "cross_links": {
+                    "ceos": "https://database.eohandbook.com/database/instrumentsummary.aspx?instrumentID=404"
+                }
+            },
+            "family": [
+                "VGT2_SPOT5",
+                "VGT3_PROBAV"
+            ],
+            "platform_companions": [
+                "HRVIR_SPOT4"
+            ]
+        },
+        "VGT2_SPOT5": {
+            "id": "VGT2_SPOT5",
+            "name": "Vegetation",
+            "acronym": "VGT-2",
+            "type": "multispectral",
+            "platform_type": "satellite",
+            "platform": [
+                "SPOT-5"
+            ],
+            "operator": [
+                "CNES"
+            ],
+            "start_date": "2002-05-04",
+            "end_date": "2014-05-31",
+            "status": "retired",
+            "availability": "public",
+            "contributors": [
+                "https://github.com/davemlz"
+            ],
+            "references": [
+                "https://cnes.fr/projets/vegetation",
+                "https://cnes.fr/projets/vegetation/instruments",
+                "https://earth.esa.int/eogateway/missions/spot-5",
+                "https://database.eohandbook.com/database/instrumentsummary.aspx?instrumentID=404",
+                "https://publications.vito.be/2016-1034-spotvgt-collection-3-products-user-manual-v10.pdf",
+                "https://spot-vegetation.com/en",
+                "https://space.oscar.wmo.int/satellites/view/spot_5"
+            ],
+            "notes": "VGT-2 retained the VGT-1 spectral configuration while improving stray-light control, the MIR detector, calibration, and attitude restitution. Its native nadir ground sampling distance was approximately 1.15 km and increased toward the swath edge; standard synthesis products were distributed on a 1 km grid. SPOT-VEGETATION measurements concluded on 2014-05-31, before the end of the wider SPOT-5 mission.",
+            "data_links": [
+                "https://dataspace.copernicus.eu/spot-vegetation",
+                "https://docs.terrascope.be/DataProducts/SPOT-VGT/ProductsOverview.html",
+                "https://spot-vegetation.com/en"
+            ],
+            "extensions": {
+                "spectral": {
+                    "bands": {
+                        "B0": {
+                            "center_wavelength": 450,
+                            "bandwidth": 40,
+                            "band_description": "Blue band for atmospheric correction",
+                            "common_name": "blue",
+                            "gsd": 1150
+                        },
+                        "B2": {
+                            "center_wavelength": 645,
+                            "bandwidth": 70,
+                            "band_description": "Red vegetation band",
+                            "common_name": "red",
+                            "gsd": 1150
+                        },
+                        "B3": {
+                            "center_wavelength": 835,
+                            "bandwidth": 110,
+                            "band_description": "Near-infrared vegetation band",
+                            "common_name": "nir08",
+                            "gsd": 1150
+                        },
+                        "MIR": {
+                            "center_wavelength": 1665,
+                            "bandwidth": 170,
+                            "band_description": "Mid-infrared vegetation and surface-moisture band",
+                            "common_name": "swir16",
+                            "gsd": 1150
+                        }
+                    }
+                },
+                "imaging": {
+                    "swath_width": 2250
+                },
+                "cross_links": {
+                    "ceos": "https://database.eohandbook.com/database/instrumentsummary.aspx?instrumentID=404"
+                }
+            },
+            "family": [
+                "VGT1_SPOT4",
+                "VGT3_PROBAV"
+            ],
+            "platform_companions": [
+                "HRG_SPOT5",
+                "HRS_SPOT5"
+            ]
+        },
+        "VGT3_PROBAV": {
+            "id": "VGT3_PROBAV",
+            "name": "Vegetation",
+            "acronym": "VGT-3",
+            "type": "multispectral",
+            "platform_type": "satellite",
+            "platform": [
+                "PROBA-V"
+            ],
+            "operator": [
+                "ESA"
+            ],
+            "start_date": "2013-05-07",
+            "end_date": "2021-10-31",
+            "status": "retired",
+            "availability": "public",
+            "contributors": [
+                "https://github.com/davemlz"
+            ],
+            "references": [
+                "https://earth.esa.int/eogateway/instruments/vegetation-proba-v",
+                "https://earth.esa.int/eogateway/instruments/vegetation-proba-v/description",
+                "https://cnes.fr/projets/vegetation",
+                "https://cnes.fr/projets/vegetation/instruments",
+                "https://database.eohandbook.com/database/instrumentsummary.aspx?instrumentID=1664",
+                "https://proba-v.vgt.vito.be/sites/probavvgt/files/downloads/PROBA-V_C2_Products_User_Manual.pdf",
+                "https://proba-v.vgt.vito.be/en/quality/spectral-response-functions",
+                "https://proba-v.vgt.vito.be/en/proba-v-ready-close-its-eyes",
+                "https://developers.google.com/earth-engine/datasets/catalog/VITO_PROBAV_C1_S1_TOC_333M"
+            ],
+            "notes": "VGT-3 was a miniaturized successor to the SPOT-VEGETATION instruments. Its three telescopes provided a continent-scale swath. Native nadir sampling was 100 m for the VNIR channels and 200 m for SWIR, degrading toward the swath edges; commonly distributed synthesis products use 100 m, approximately 300/333 m, or 1 km grids. The included spectral response functions are the measured central-camera responses published by VITO. Global operations ended on 2020-06-30, followed by experimental observations over Europe and Africa through 2021-10-31.",
+            "data_links": [
+                "https://proba-v.vgt.vito.be/en/proba-v-collection-2-data-access",
+                "https://documentation.dataspace.copernicus.eu/APIs/openEO/openeo-community-examples/python/AccessPROBA-V/PROBA_V.html",
+                "https://developers.google.com/earth-engine/datasets/catalog/VITO_PROBAV_C1_S1_TOC_333M"
+            ],
+            "extensions": {
+                "spectral": {
+                    "bands": {
+                        "BLUE": {
+                            "center_wavelength": 460,
+                            "bandwidth": 42,
+                            "band_description": "Blue band for atmospheric correction",
+                            "common_name": "blue",
+                            "gsd": 100
+                        },
+                        "RED": {
+                            "center_wavelength": 658,
+                            "bandwidth": 82,
+                            "band_description": "Red vegetation band",
+                            "common_name": "red",
+                            "gsd": 100
+                        },
+                        "NIR": {
+                            "center_wavelength": 834,
+                            "bandwidth": 121,
+                            "band_description": "Near-infrared vegetation band",
+                            "common_name": "nir08",
+                            "gsd": 100
+                        },
+                        "SWIR": {
+                            "center_wavelength": 1610,
+                            "bandwidth": 89,
+                            "band_description": "Shortwave-infrared vegetation and surface-moisture band",
+                            "common_name": "swir16",
+                            "gsd": 200
+                        }
+                    },
+                    "spectral_response_function": "https://raw.githubusercontent.com/awesome-spectral-indices/awesome-earth-observation-instruments/refs/heads/main/src/srf/VGT3_PROBAV_SRF.csv",
+                    "spectral_response_function_file": "VGT3_PROBAV_SRF.csv"
+                },
+                "imaging": {
+                    "swath_width": 2250,
+                    "across_fov": 102
+                },
+                "data_access": {
+                    "ee": {
+                        "primary": {
+                            "docs": "https://developers.google.com/earth-engine/datasets/catalog/VITO_PROBAV_C1_S1_TOC_333M",
+                            "collection": "VITO/PROBAV/C1/S1_TOC_333M"
+                        },
+                        "boa": {
+                            "docs": "https://developers.google.com/earth-engine/datasets/catalog/VITO_PROBAV_C1_S1_TOC_333M",
+                            "collection": "VITO/PROBAV/C1/S1_TOC_333M"
+                        }
+                    }
+                },
+                "cross_links": {
+                    "idb": "https://www.indexdatabase.de/db/s-single.php?id=169",
+                    "ceos": "https://database.eohandbook.com/database/instrumentsummary.aspx?instrumentID=1664"
+                }
+            },
+            "family": [
+                "VGT1_SPOT4",
+                "VGT2_SPOT5"
+            ],
+            "platform_companions": []
         },
         "WV110_WV2": {
             "id": "WV110_WV2",
