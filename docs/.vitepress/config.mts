@@ -38,6 +38,7 @@ export default defineConfig({
             { text: '06 — Data access', link: '/tutorials/06_data_access' },
             { text: '07 — Advanced search', link: '/tutorials/07_advanced_search' },
             { text: '08 — Plotting spectral data', link: '/tutorials/08_plotting' },
+            { text: '09 — Updating the catalogue', link: '/tutorials/09_updating_the_catalogue' },
           ],
         },
       ],

@@ -36,16 +36,17 @@ Awesome Earth Observation Instruments catalogue. 🐈
 
 ```pycon
 >>> import xeo
->>> xeo.catalogue
-Awesome Earth Observation Instruments (v0.1.0)
->>> len(xeo.catalogue.instruments)
-28
+>>> isinstance(xeo.catalogue, xeo.Catalogue)
+True
+>>> len(xeo.catalogue.instruments) > 0
+True
 ```
 
 **Functions:**
 
 - [**search**](#xeo.Catalogue.search) – Search instruments using core metadata and spectral availability.
 - [**to_dict**](#xeo.Catalogue.to_dict) – Return an independent dictionary containing the raw catalogue.
+- [**update**](#xeo.Catalogue.update) – Replace the local catalogue with the current upstream catalogue.
 
 **Attributes:**
 
@@ -125,8 +126,10 @@ catalogue order.
 True
 >>> all(item.has_srf for item in xeo.catalogue.search(has_srf=True).values())
 True
->>> list(xeo.catalogue.search(start_date="2000-01-01/2003-01-01"))
-['MODIS_AQUA']
+>>> "MODIS_AQUA" in xeo.catalogue.search(
+...     start_date="2000-01-01/2003-01-01"
+... )
+True
 ```
 
 #### `to_dict` {#xeo.Catalogue.to_dict}
@@ -135,6 +138,34 @@ to_dict()
 ```
 
 Return an independent dictionary containing the raw catalogue.
+
+#### `update` {#xeo.Catalogue.update}
+```python
+update()
+```
+
+Replace the local catalogue with the current upstream catalogue.
+
+The complete catalogue is downloaded from the Awesome Earth Observation
+Instruments repository. When its content differs from the local copy,
+the bundled JSON file is replaced atomically and the catalogue and
+instrument objects in the current Python session are refreshed.
+
+<details class="note" open markdown="1">
+<summary>Notes</summary>
+
+This method requires an internet connection and write access to the
+installed ``xeo/data`` directory.
+
+</details>
+
+**Examples:**
+
+```pycon
+>>> import xeo
+>>> xeo.catalogue.update()
+The catalogue is already updated (version <x.x.x>).
+```
 
 #### `version` {#xeo.Catalogue.version}
 ```python

@@ -140,6 +140,16 @@ print(planetary_computer)
 
 Supported providers are `ee`, `planetary_computer`, `cdse`, and `eopf`. Supported processing and product levels are `primary`, `boa`, `toa`, `raw`, `lst`, `wst`, `grd`, `rtc`, and `slc`. Available entries contain `stac_endpoint`, `collection`, and `docs`; unavailable combinations return `None`.
 
+## Update the local catalogue
+
+Each package release includes a catalogue snapshot. Download the current catalogue from GitHub and replace the local copy when its contents have changed with:
+
+```python
+xeo.catalogue.update()
+```
+
+The catalogue and shared `xeo.instruments` collection are refreshed immediately. Updating requires an internet connection and write access to the installed `xeo/data` directory. See the [updating the catalogue tutorial](/tutorials/09_updating_the_catalogue) for details.
+
 ## Next steps
 
 - Follow the [tutorials](/tutorials/) for complete, executable examples.

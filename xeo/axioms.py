@@ -4,10 +4,16 @@ from copy import deepcopy
 from datetime import date
 from typing import TYPE_CHECKING, Any
 from urllib.parse import unquote, urlparse
+from urllib.request import Request, urlopen
 
 from box import Box
 
-from .utils import _load_JSON
+from .utils import (
+    CATALOGUE_URL,
+    _load_JSON,
+    _replace_JSON,
+    _validate_catalogue_json,
+)
 
 if TYPE_CHECKING:
     import pandas as pd
@@ -26,10 +32,10 @@ class Catalogue(object):
     Examples
     --------
     >>> import xeo
-    >>> xeo.catalogue
-    Awesome Earth Observation Instruments (v0.1.0)
-    >>> len(xeo.catalogue.instruments)
-    28
+    >>> isinstance(xeo.catalogue, xeo.Catalogue)
+    True
+    >>> len(xeo.catalogue.instruments) > 0
+    True
     """
 
     def __init__(
@@ -73,6 +79,84 @@ class Catalogue(object):
 
         return f"{self.name} (v{self.version})"
 
+    def _replace_data(self, catalogue: dict[str, Any]) -> None:
+        """Refresh catalogue data while preserving shared object identities."""
+
+        instrument_objects = {
+            instrument_id: self.instruments.get(instrument_id)
+            or Instrument(instrument_data)
+            for instrument_id, instrument_data in catalogue["instruments"].items()
+        }
+        for instrument_id, instrument in instrument_objects.items():
+            instrument._data = catalogue["instruments"][instrument_id]
+
+        replacement = Instruments(instrument_objects, frozen_box=True)
+        dict.clear(self.instruments)
+        dict.update(self.instruments, replacement)
+        object.__setattr__(
+            self.instruments,
+            "_box_config",
+            replacement._box_config.copy(),
+        )
+
+        self.data = catalogue
+        self.name = catalogue["name"]
+        self.version = catalogue["version"]
+        self.link = catalogue["link"]
+        self.href = catalogue["link"]
+
+    def update(self) -> None:
+        """Replace the local catalogue with the current upstream catalogue.
+
+        The complete catalogue is downloaded from the Awesome Earth Observation
+        Instruments repository. When its content differs from the local copy,
+        the bundled JSON file is replaced atomically and the catalogue and
+        instrument objects in the current Python session are refreshed.
+
+        Notes
+        -----
+        This method requires an internet connection and write access to the
+        installed ``xeo/data`` directory.
+
+        Examples
+        --------
+        >>> import xeo
+        >>> xeo.catalogue.update()  # doctest: +SKIP
+        The catalogue is already updated (version <x.x.x>).
+        """
+
+        request = Request(CATALOGUE_URL, headers={"User-Agent": "xeo"})
+        try:
+            with urlopen(request, timeout=30) as response:
+                contents = response.read()
+        except Exception as error:
+            raise RuntimeError(
+                f"Unable to download the catalogue from {CATALOGUE_URL}."
+            ) from error
+
+        try:
+            downloaded = _validate_catalogue_json(contents)
+        except ValueError as error:
+            raise RuntimeError(
+                "The downloaded catalogue is invalid and the local catalogue "
+                "has not been changed."
+            ) from error
+
+        if downloaded == self.data:
+            print(f"The catalogue is already updated (version {self.version}).")
+            return
+
+        try:
+            _replace_JSON(contents)
+        except OSError as error:
+            raise RuntimeError(
+                "Unable to replace the local catalogue. Ensure the installed "
+                "xeo/data directory is writable."
+            ) from error
+
+        self._replace_data(downloaded)
+        print(f"The catalogue has been updated to version {self.version}.")
+
     def search(self, **kwargs: Any) -> Instruments:
         """Search instruments using core metadata and spectral availability.
 
@@ -103,8 +187,10 @@ class Catalogue(object):
         True
         >>> all(item.has_srf for item in xeo.catalogue.search(has_srf=True).values())
         True
-        >>> list(xeo.catalogue.search(start_date="2000-01-01/2003-01-01"))
-        ['MODIS_AQUA']
+        >>> "MODIS_AQUA" in xeo.catalogue.search(
+        ...     start_date="2000-01-01/2003-01-01"
+        ... )
+        True
         """
 
         searchable_properties = (

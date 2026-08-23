@@ -4,10 +4,15 @@ All notable changes to `xeo` are documented in this file.
 
 ## 0.4.0 (Upcoming)
 
+### Added
+
+- Added `Catalogue.update()` for downloading the current upstream catalogue, atomically replacing the local JSON snapshot when its contents differ, and immediately refreshing the shared catalogue and instrument objects.
+
 ### Documentation
 
 - Added project funding acknowledgments and funder logos to the README and documentation website.
 - Added a `More` navigation menu containing the changelog, citation guidance, and funding page.
+- Added a tutorial covering catalogue update requirements, status messages, persistence, and current-session behavior.
 
 ## 0.3.0
 

@@ -12,3 +12,4 @@ Learn the `xeo` API through these step-by-step tutorials.
 - [06 — Data access points](./06_data_access)
 - [07 — Advanced catalogue search](./07_advanced_search)
 - [08 — Plotting spectral data](./08_plotting)
+- [09 — Updating the catalogue](./09_updating_the_catalogue)

@@ -229,6 +229,16 @@ catalogue_copy = xeo.catalogue.to_dict()
 
 Treat `.data` as read-only. Use `.to_dict()` when downstream code needs to modify a catalogue or instrument dictionary.
 
+## Update the local catalogue
+
+Each `xeo` release includes a catalogue snapshot. To compare it with the current catalogue on GitHub and replace the local JSON file when necessary, use:
+
+```python
+xeo.catalogue.update()
+```
+
+The method reports whether the catalogue was already current or was updated to a new version. A successful update refreshes `xeo.catalogue` and the shared `xeo.instruments` collection immediately. It requires an internet connection and write access to the installed `xeo/data` directory.
+
 # Tutorials
 
 The tutorial notebooks provide complete, executable examples:
@@ -241,6 +251,7 @@ The tutorial notebooks provide complete, executable examples:
 6. [Data access](docs/notebooks/06_data_access.ipynb)
 7. [Advanced search](docs/notebooks/07_advanced_search.ipynb)
 8. [Plotting spectral data](docs/notebooks/08_plotting.ipynb)
+9. [Updating the catalogue](docs/notebooks/09_updating_the_catalogue.ipynb)
 
 # Contributing
 

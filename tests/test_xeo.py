@@ -1,4 +1,5 @@
 import json
+from copy import deepcopy
 from importlib.resources import files
 from io import BytesIO
 from urllib.error import URLError
@@ -49,6 +50,147 @@ def test_catalogue_uses_one_shared_instrument_collection():
     assert isinstance(xeo.instruments, xeo.Instruments)
     assert xeo.catalogue.instruments is xeo.instruments
     assert xeo.instruments["MSI_S2A"] is xeo.instruments.MSI_S2A
+
+
+def test_catalogue_update_reports_when_local_copy_is_current(
+    monkeypatch,
+    capsys,
+):
+    from xeo import axioms
+
+    data = xeo.catalogue.to_dict()
+    catalogue = xeo.Catalogue(data)
+    contents = json.dumps(data).encode()
+    replacements = []
+    requests = []
+
+    def fake_urlopen(request, timeout):
+        requests.append(
+            (request.full_url, timeout, request.get_header("User-agent"))
+        )
+        return BytesIO(contents)
+
+    monkeypatch.setattr(
+        axioms,
+        "urlopen",
+        fake_urlopen,
+    )
+    monkeypatch.setattr(
+        axioms,
+        "_replace_JSON",
+        lambda downloaded: replacements.append(downloaded),
+    )
+
+    catalogue.update()
+
+    assert capsys.readouterr().out == (
+        f"The catalogue is already updated (version {data['version']}).\n"
+    )
+    assert replacements == []
+    assert requests == [(axioms.CATALOGUE_URL, 30, "xeo")]
+
+
+def test_catalogue_update_replaces_file_and_refreshes_shared_objects(
+    monkeypatch,
+    capsys,
+):
+    from xeo import axioms
+
+    data = xeo.catalogue.to_dict()
+    catalogue = xeo.Catalogue(data)
+    instruments = catalogue.instruments
+    msi = instruments.MSI_S2A
+    updated = deepcopy(data)
+    updated["version"] = "9.9.9"
+    updated["instruments"]["MSI_S2A"]["name"] = "Updated MSI"
+    contents = json.dumps(updated).encode()
+    replacements = []
+
+    monkeypatch.setattr(
+        axioms,
+        "urlopen",
+        lambda request, timeout: BytesIO(contents),
+    )
+    monkeypatch.setattr(
+        axioms,
+        "_replace_JSON",
+        lambda downloaded: replacements.append(downloaded),
+    )
+
+    catalogue.update()
+
+    assert replacements == [contents]
+    assert catalogue.version == "9.9.9"
+    assert catalogue.instruments is instruments
+    assert catalogue.instruments.MSI_S2A is msi
+    assert msi.name == "Updated MSI"
+    assert capsys.readouterr().out == (
+        "The catalogue has been updated to version 9.9.9.\n"
+    )
+
+
+def test_catalogue_update_rejects_invalid_downloads(monkeypatch):
+    from xeo import axioms
+
+    catalogue = xeo.Catalogue(xeo.catalogue.to_dict())
+    original = catalogue.to_dict()
+    monkeypatch.setattr(
+        axioms,
+        "urlopen",
+        lambda request, timeout: BytesIO(b"not json"),
+    )
+
+    with pytest.raises(RuntimeError, match="downloaded catalogue is invalid"):
+        catalogue.update()
+
+    assert catalogue.data == original
+
+
+def test_catalogue_update_does_not_refresh_memory_when_file_write_fails(
+    monkeypatch,
+):
+    from xeo import axioms
+
+    data = xeo.catalogue.to_dict()
+    catalogue = xeo.Catalogue(data)
+    updated = deepcopy(data)
+    updated["version"] = "9.9.9"
+    contents = json.dumps(updated).encode()
+    monkeypatch.setattr(
+        axioms,
+        "urlopen",
+        lambda request, timeout: BytesIO(contents),
+    )
+
+    def fail_write(contents):
+        raise PermissionError("read-only")
+
+    monkeypatch.setattr(axioms, "_replace_JSON", fail_write)
+
+    with pytest.raises(RuntimeError, match="xeo/data directory is writable"):
+        catalogue.update()
+
+    assert catalogue.version == data["version"]
+
+
+def test_replace_json_atomically_writes_exact_downloaded_bytes(
+    monkeypatch,
+    tmp_path,
+):
+    from xeo import utils
+
+    destination = tmp_path / "catalogue.json"
+    destination.write_bytes(b"old")
+    monkeypatch.setattr(
+        utils,
+        "_catalogue_path",
+        lambda file="catalogue.json": destination,
+    )
+
+    utils._replace_JSON(b'{"version":"new"}')
+
+    assert destination.read_bytes() == b'{"version":"new"}'
+    assert not list(tmp_path.glob("*.tmp"))
 
 
 def test_catalogue_search_returns_an_instruments_collection():
@@ -124,8 +266,16 @@ def test_catalogue_search_supports_inclusive_start_date_intervals():
     results = xeo.catalogue.search(start_date="2000-01-01/2003-01-01")
     boundary = xeo.catalogue.search(start_date="2002-05-04/2002-05-04")
 
-    assert list(results) == ["MODIS_AQUA"]
-    assert list(boundary) == ["MODIS_AQUA"]
+    assert "MODIS_AQUA" in results
+    assert all(
+        "2000-01-01" <= instrument.start_date <= "2003-01-01"
+        for instrument in results.values()
+    )
+    assert "MODIS_AQUA" in boundary
+    assert all(
+        instrument.start_date == "2002-05-04"
+        for instrument in boundary.values()
+    )
 
 
 def test_catalogue_search_supports_exact_dates_and_lists_of_date_queries():
@@ -134,13 +284,19 @@ def test_catalogue_search_supports_exact_dates_and_lists_of_date_queries():
         start_date=["1999-04-15/1999-12-18", "2002-05-04"]
     )
 
-    assert list(exact) == ["MODIS_AQUA"]
-    assert list(multiple) == [
-        "ASTER",
-        "ETM_L7",
-        "MODIS_AQUA",
-        "MODIS_TERRA",
-    ]
+    assert "MODIS_AQUA" in exact
+    assert all(
+        instrument.start_date == "2002-05-04"
+        for instrument in exact.values()
+    )
+    assert {"ASTER", "ETM_L7", "MODIS_AQUA", "MODIS_TERRA"}.issubset(
+        multiple
+    )
+    assert all(
+        "1999-04-15" <= instrument.start_date <= "1999-12-18"
+        or instrument.start_date == "2002-05-04"
+        for instrument in multiple.values()
+    )
 
 
 @pytest.mark.parametrize(
