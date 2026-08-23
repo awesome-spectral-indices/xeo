@@ -1,6 +1,6 @@
 """xeo - Earth observation instruments in Python."""
 
-__version__ = "0.3.0"
+__version__ = "0.4.0"
 __author__ = "David Montero Loaiza <dml.mont@gmail.com>"
 __all__ = [
     "Catalogue",

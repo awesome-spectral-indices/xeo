@@ -2,11 +2,15 @@
 
 All notable changes to `xeo` are documented in this file.
 
-## 0.4.0 (Upcoming)
+## 0.4.0
 
 ### Added
 
 - Added `Catalogue.update()` for downloading the current upstream catalogue, atomically replacing the local JSON snapshot when its contents differ, and immediately refreshing the shared catalogue and instrument objects.
+
+### Changed
+
+- Updated the bundled Awesome Earth Observation Instruments catalogue to version 0.4.0.
 
 ### Documentation
 
